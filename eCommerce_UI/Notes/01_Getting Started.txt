@@ -1,0 +1,83 @@
+﻿2. ASP.NET Core Platform
+
+HttpRequest is incapsulated in HttpContext logic.
+
+-> middleware should be made according to the single resposibility principale
+
+-> Asp.Net Core, the Web server is a console app that runs in a infinite loop while,
+listening to Httprequests 
+
+-> in .net core they are 3 app framework: MVC, RazorPages, Blazor
+-> each of them have different types of Middleware
+
+
+MVC web app or wep API :
+-> model classes, razor views, controller methods
+
+Razer pages:
+-> razor view, coresponde code behind model classes
+
+Blazor pages:
+-> blazor components(razor components)
+
+
+3. How a Blazor App is Bootstrapped
+
+
+-- Program.cs --
+
+.Run() -> runs in a infinite loop and listen to HttpRequests and process the request 
+
+
+-- Startup.cs
+
+ConfigureServecies	: dependincy injection -> inject all of the dependences that the middleware uses
+Configure			: middleware
+
+app.UseEndpoints(...) -> here we configure our blazor middleware
+
+endpoints.MapFallbackToPage("/_Host") : map all request to this Host page !!!
+
+-> blazor app framework is a single page app framework
+
+
+4. Understanding Project Structure
+
+_Host.cshtml	-> the entry point of our blazor app
+App.razor		-> the route component
+
+-- App.razor --
+
+<Route AppAssembly="typeof(Program).Assembly"	: we are running in this Assembly
+<Found Context="routeData">						: if it find the location of the user request, then it will 
+													display the main layout component								
+
+<RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+
+-- MainLayout.razor
+
+@body -> all our future components will be display in the @body placeholder
+
+
+5. Adding Dynamic Content
+
+
+6. View, State and Event - the Three Main Aspects
+
+State-> View -> Event -> State -> .... 
+
+State :
+
+private string Title
+private string Content
+
+View :
+
+<h3> @title <h3/>
+<h3> @content <h3/>
+
+
+Event: 
+
+private void ServerClick()		{ ... }
+private void WebAssemblyClick()	{ ... }s

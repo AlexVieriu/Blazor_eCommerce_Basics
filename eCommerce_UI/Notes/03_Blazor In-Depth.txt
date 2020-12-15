@@ -1,0 +1,126 @@
+﻿23. Data Binding Part 1
+
+-- Index.razor --
+
+UI:
+
+-> one way data binding : State-> View
+	Product Name: @product.Name
+
+-> two ways data binding: State-> View, View->State
+	<input type="text" @bind-value="@product.Name" @bind-value:event="oninput" />
+
+CheckBox:
+<input type="checkbox" @bind-value="isActive">
+@isActive
+
+
+@Code:
+
+private bool isActive;
+Product product = new Product(){....};
+
+
+25. Overview of Communication between Components
+
+-> page components
+-> non-page components(reusable components)
+	-> can have multiple non-page components
+
+a. Rounting Parameters
+b. Regular Parameters
+c. Cascading Parameters
+d. EventCallback
+e. Reference 
+
+
+26. Review Parameters, Route Parameters and EventCallback
+
+I. Regular Parameters
+-> ex: in a foreach function we pass the parameter from the base component to the child component
+
+II. Rounting Parameters
+-> pass parameter from one component to another: base comp	-> base component
+												 child comp	-> base component
+ex: @page "/product/{id:int}"
+
+III. EventCallback
+
+-> we create a parameter:	filter at the child component level and we pass it to the base component using 
+							EventCallback parameter
+
+
+27. Cascading Parameters
+
+-> we only can cascade values from the top to the bottom, from base component to the child component
+
+-> create a Base Component, with a button that pass the parameter to all his childs
+-> create Component1.razor, Component2.razor
+
+-> StateHasChanged(): 
+
+
+
+28. Referencing Child Components
+
+-> base component can access the methods from the child component and use it 
+
+UI:
+-> declare <Visibility> with the @ref so we can display it
+-> create a button that access the visibilityComponent method
+
+@code:
+-> write the @onclick event that access the method from the child component
+
+
+29. RenderFragment
+
+-- RenderFrag --
+
+UI: 
+<TemplatedComponent Items="products" TItems="Product">
+	<Header>
+	<ReapeaterItem Context="item">
+       <p>Name: @item.Name</p>
+       <p>Brand: @item.Brand</p>
+       <p>Description: @item.Description</p>      
+	<Footer>
+
+@Code:
+{
+	create a List of Products
+}
+
+
+-- TemplaterComponent.razor --
+
+UI: 
+
+@Header
+foreach(...)
+@Footer
+
+
+@code:
+
+RenderFragment Header 
+RenderFragment Footer
+List<TItems> Items 
+RenderFragment<TItems> RepeaterItem 
+
+
+
+30. When does a component render
+
+a. When components are created
+	-> when you just come to the page
+	-> when you refresh the page
+	-> when you navigate away from the component/page and come back to the page that contains the that component/page 
+
+b. When components events are triggered
+	-> only Ui events( if we trigger a event from the backend, will not work)
+c. When components parameter values are changed 
+d. When developers manually trigger the rendering
+
+
+31. Component Lifecycle Events

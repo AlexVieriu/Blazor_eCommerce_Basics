@@ -1,0 +1,12 @@
+﻿<div class="ml-5">
+    <h4>Component 2</h4>
+    <p>
+        Count: @Counter
+    </p>
+</div>
+
+
+@code{
+    [CascadingParameter(Name = "TestCounter")]
+    private int Counter { get; set; }
+}

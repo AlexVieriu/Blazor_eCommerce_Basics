@@ -1,0 +1,18 @@
+﻿@page "/refChildComp"
+
+<button @onclick="Toggle">Change Visibility</button>
+
+<br />
+
+<Visibility @ref="visibilityComponent"/>
+
+
+
+@code{
+    private Visibility visibilityComponent;
+
+    private void Toggle()
+    {
+        this.visibilityComponent.SetVisibility();
+    }
+}
