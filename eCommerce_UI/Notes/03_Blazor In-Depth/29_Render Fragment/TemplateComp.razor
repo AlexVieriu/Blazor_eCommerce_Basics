@@ -1,0 +1,21 @@
+﻿@typeparam TList
+
+<div>
+    @foreach (var item in Items)
+    {
+        @RepeatFrag(item)
+    }
+</div>
+
+
+@code{
+    [Parameter]
+    public RenderFragment Header { get; set; }
+    [Parameter]
+    public RenderFragment Footer { get; set; }
+    
+    [Parameter]
+    public List<TList> Items { get; set; }
+    [Parameter]
+    public RenderFragment<TList> RepeatFrag { get; set; }
+}
