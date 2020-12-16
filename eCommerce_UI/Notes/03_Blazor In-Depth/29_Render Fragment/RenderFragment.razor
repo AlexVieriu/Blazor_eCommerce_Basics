@@ -1,24 +1,17 @@
 ﻿@page "/rederFragment"
 
 
-<TemplateComp Items="products" TList="Product">
-    <Header>
-        <p>
-            <b>Welcome</b>
-        </p>
-    </Header>
+
+<TemplateComponent Items="products" TList="Product">
+    
     <RepeatFrag Context="item">
         <p>@item.Name</p>
         <p>@item.Brand</p>
         <p>@item.Description</p>
         <hr /> 
     </RepeatFrag>
-    <Footer>
-        <div style="font-size:20px">
-            Feel free....
-        </div>
-    </Footer>
-</TemplateComp>
+    
+</TemplateComponent>
 
 
 @code{

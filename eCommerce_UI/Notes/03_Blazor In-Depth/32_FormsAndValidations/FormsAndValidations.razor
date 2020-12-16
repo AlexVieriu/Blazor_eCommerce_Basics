@@ -1,0 +1,67 @@
+﻿@page "/formAndValidations"
+
+
+<EditForm Model="person" OnValidSubmit="ValidFormSubmitted">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <label>
+        First Name:<br />
+        <InputText id="fname" @bind-Value="@person.FirstName" />
+    </label>
+
+    <br />
+    <br />
+    <label>
+        Last Name:<br />
+        <InputText id="lname" @bind-Value="@person.LastName" />
+    </label>
+    <br />
+    <br />
+
+    <label>
+        Employeer Number: <br />
+        <InputNumber id="emp_number" @bind-Value="@person.EmployeeNumber" />
+    </label>
+    <br />
+    <br />
+
+
+    <label>
+        Email:<br />
+        <InputText id="email" @bind-Value="@person.Email" />
+    </label>
+    <br />
+    <br />
+
+    <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+</EditForm>
+
+@code{
+
+    private Person person = new Person();
+
+    private void ValidFormSubmitted()
+    {
+
+    }
+
+    public class Person
+    {
+        [Required]
+        [StringLength(5)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(5)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Range(1, 100)]
+        public int EmployeeNumber { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
+}

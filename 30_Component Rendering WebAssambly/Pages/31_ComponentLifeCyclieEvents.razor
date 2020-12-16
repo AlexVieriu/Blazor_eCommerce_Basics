@@ -1,41 +1,40 @@
-﻿@page "/"
+﻿<hr />
+<div>
+    <p>Child component</p>
+</div>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
-
-<_31_ComponentLifeCyclieEvents />
 
 @code{
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Console.WriteLine($"Parent-SetParametersAsync : {DateTime.Now}");
+        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         return base.SetParametersAsync(parameters);
     }
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"Parent-OnInitialized : {DateTime.Now}");
+        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         base.OnInitialized();
     }
 
     protected override void OnParametersSet()
     {
-        Console.WriteLine($"Parent-OnParametersSet : {DateTime.Now}");
+        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         base.OnParametersSet();
     }
 
-    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
 
     protected override bool ShouldRender()
     {
-        Console.WriteLine($"Parent-OnParametersSet : {DateTime.Now}");
+        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         return base.ShouldRender();
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
-        Console.WriteLine($"Parent-OnParametersSet : {DateTime.Now}");
+        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         base.OnAfterRender(firstRender);
     }
 }

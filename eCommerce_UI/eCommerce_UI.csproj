@@ -3,14 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
-    <Content Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
-    <EmbeddedResource Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
-    <None Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\eShop.CoreBusiness\eShop.CoreBusiness.csproj" />
     <ProjectReference Include="..\eShop.DataStore\eShop.DataStore.csproj" />

@@ -163,13 +163,15 @@ For more information:
 https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&tabs=visual-studio
 
 
-
 31. Component Lifecycle Events
 
 I. First time Rendering
 -> when the page is just loaded
 -> when you navigate to the component
 
+Methods: SetParameterAsync(), Oninitialized(), OnParameterSet()
+
+Server Side Blazor:
 Why they are rendered twice?
 
 Browser -> Request -> Server
@@ -178,5 +180,46 @@ Browser <- Render 1 <- Server
 Browser -> Signal R -> Server
 Browser <- Render 2 <- Server
 
+Blazor WebAssambly:
+Browser -> Request -> Server
+Browser <- Render 1 <- Server
 
-II. After the first time Rendering
+Methods:  OnAfterRender()
+
+-> after all of this the page is LOADED
+-> the double loading happens when the app is loaded for the very first time !!
+
+
+II. Rerendering
+(8:30)
+-> add a button to base and  child component
+
+a. adding a parameter for the child component
+
+How the methods are called: 
+Parent - ShouldRender
+	Child - SetParameters
+	Child - OnPArametersSet
+	Child - ShouldRender
+Parent - OnAfterRender
+	Child - OnAfterRender
+
+
+b. without adding paramenter for the child component
+
+How the methods are called: 
+Parent - ShouldRender
+Parent - OnAfterRender
+
+-> the child component is not rendered ! 
+
+
+32. Forms and Validations
+
+-> blazor is a single pg app: only the first pageload goes to the HttpRequest and response pipeline
+-> the subsequent actions will not be postback to the backend in order to perform submissions
+
+Resolution:
+<EditForm>,<InputText>,<InputNumber>
+
+-> <EditForm> must be bind to a Model
