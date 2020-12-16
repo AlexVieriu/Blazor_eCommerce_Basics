@@ -118,9 +118,50 @@ a. When components are created
 	-> when you navigate away from the component/page and come back to the page that contains the that component/page 
 
 b. When components events are triggered
-	-> only Ui events( if we trigger a event from the backend, will not work)
+	-> even if we comment : currentCount++ , the component is still triggered
+	-> as long as an event is triggered, the component will rerender
+	-> component rerender only for UI events: click button, changing a dropdownlist, ...
+	-> if we create an event or a delegate in c# and we want to trigger that event/delegate manually, 
+	it will not work, the component will not render
+	-> when a component UI are triggered, the components are rendered, but that UI event must be 
+	inside the component
+	-> if the event is outside of the component will not be rendered
+ex1: if we have a button in the parent/child component, the child/parent component will not be rendered
+
+Solution/Exception: use RenderFragment to pass the event from the child to the parent, so the component rerender
+					
 c. When components parameter values are changed 
+use [Parameter] to pass the event to the child, so the component rerender
+
 d. When developers manually trigger the rendering
+UI:
+<ChildComponent @ref="child" />
+
+@code:
+private ChildComponent child;
+
+child.Counter = currentCount;
+child.Refresh();
+
+Rerender the child component:
+public void Refresh()
+{
+    this.StateHasChanged();
+}
+
+Demo : Create a WebAssembly project
+
+Debugging:
+a. In Visual Studio
+-- launchSettings.json --
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+
+b. In Browser
+https://www.youtube.com/watch?v=QgRwaw_RQ8w&ab_channel=ZiaA.Shaikh
+
+For more information:
+https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&tabs=visual-studio
+
 
 
 31. Component Lifecycle Events

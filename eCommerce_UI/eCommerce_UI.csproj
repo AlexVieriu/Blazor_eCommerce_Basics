@@ -5,13 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\eShop.CoreBusiness\eShop.CoreBusiness.csproj" />
-    <ProjectReference Include="..\eShop.DataStore\eShop.DataStore.csproj" />
-    <ProjectReference Include="..\eShop.UseCases\eShop.UseCases.csproj" />
+    <Compile Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
+    <Content Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
+    <EmbeddedResource Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
+    <None Remove="Notes\03_Blazor In-Depth\30. When does a component render\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Notes\03_Blazor In-Depth\30. When does a component render\" />
+    <ProjectReference Include="..\eShop.CoreBusiness\eShop.CoreBusiness.csproj" />
+    <ProjectReference Include="..\eShop.DataStore\eShop.DataStore.csproj" />
+    <ProjectReference Include="..\eShop.UseCases\eShop.UseCases.csproj" />
   </ItemGroup>
 
 </Project>
