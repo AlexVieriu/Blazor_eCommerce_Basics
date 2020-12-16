@@ -165,3 +165,18 @@ https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&ta
 
 
 31. Component Lifecycle Events
+
+I. First time Rendering
+-> when the page is just loaded
+-> when you navigate to the component
+
+Why they are rendered twice?
+
+Browser -> Request -> Server
+Browser <- Render 1 <- Server
+
+Browser -> Signal R -> Server
+Browser <- Render 2 <- Server
+
+
+II. After the first time Rendering
