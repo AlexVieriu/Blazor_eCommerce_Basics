@@ -223,3 +223,22 @@ Resolution:
 <EditForm>,<InputText>,<InputNumber>
 
 -> <EditForm> must be bind to a Model
+
+@bind-Value: use inside the <EditForm>
+@bind-value: use ouside the <EditForm>
+
+UI:
+-> create a EditForm with fields from class Person
+
+@code:
+-> Create class Person and put validations
+-> create an obj of type Person: FirstName, LastName, EmployerNumber, Email
+-> create a submit method for the OnValidSubmit: ValidFormSubmitted()
+
+
+33. State Management with Observer Pattern
+
+-> STATE is at the component level or can be passed between components
+-> when you start writing more complex code, have complex projects you need to save State outside of the component :
+
+STATE STORE

@@ -1,0 +1,27 @@
+﻿@page "/counterState"
+
+
+@inject CounterStore counterStore
+
+<div>
+    <button class="btn btn-primary" @onclick="IncrementCounter">Count</button>
+    <br />
+    <p>@counterStore.GetState().Count</p>
+</div>
+
+
+
+
+@code{
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        counterStore.AddStateChangeListeners(() => { StateHasChanged(); });
+    }
+
+    public void IncrementCounter()
+    {
+        counterStore.IncrementCount();
+    }
+}

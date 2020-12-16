@@ -1,3 +1,4 @@
+using eCommerce_UI.Notes.Stores.CounterStore;
 using eShop.DataStore;
 using eShop.UseCases.PluginInterfaces;
 using eShop.UseCases.SearchProductScreen;
@@ -28,6 +29,8 @@ namespace eCommerce_UI
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<ISearchProduct, SearchProduct>();
             services.AddTransient<IViewProduct, ViewProduct>();
+
+            services.AddScoped<CounterStore>();
 
         }
 
