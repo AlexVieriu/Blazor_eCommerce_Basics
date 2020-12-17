@@ -2,6 +2,7 @@
 
 namespace eCommerce_UI.Notes.Stores.CounterStore
 {   
+    // another class
     public class CounterState
     {
         public int Count { get; }
@@ -15,6 +16,11 @@ namespace eCommerce_UI.Notes.Stores.CounterStore
     public class CounterStore
     {
         private CounterState _state;
+
+        public CounterStore()
+        {
+            _state = new CounterState(0);
+        }
 
         public CounterState GetState()
         {
@@ -40,8 +46,10 @@ namespace eCommerce_UI.Notes.Stores.CounterStore
 
         #region observer pattern
 
+        // encapsulate a method that has no parameters and does not return a value
         private Action _listeners;
 
+        // register the liseners
         public void AddStateChangeListeners(Action listener)
         {
             _listeners += listener;
@@ -54,7 +62,7 @@ namespace eCommerce_UI.Notes.Stores.CounterStore
 
         public void BroadcastStateChange()
         {
-
+            _listeners.Invoke();
         }
 
         #endregion

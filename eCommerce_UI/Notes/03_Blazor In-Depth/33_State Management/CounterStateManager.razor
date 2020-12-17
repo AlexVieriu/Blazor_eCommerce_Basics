@@ -1,5 +1,6 @@
 ﻿@page "/counterState"
 
+@implements IDisposable
 
 @inject CounterStore counterStore
 
@@ -23,5 +24,15 @@
     public void IncrementCounter()
     {
         counterStore.IncrementCount();
+    }
+
+    public void UpdateView()
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        counterStore.RemoveStateChangeListeners(UpdateView);
     }
 }

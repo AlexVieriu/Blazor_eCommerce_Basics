@@ -238,7 +238,62 @@ UI:
 
 33. State Management with Observer Pattern
 
+Recap:
+-> Encapsulation: {get; set;}
+-> Delegates : https://www.youtube.com/watch?v=R8Blt5c-Vi4&ab_channel=IAmTimCorey
+
+Action delegate : https://www.tutorialsteacher.com/csharp/csharp-action-delegate
+Func delegate	: https://www.tutorialsteacher.com/csharp/csharp-func-delegate
+
+
+Action<T> Delegate:
+	-> Encapsulates a method that has a single parameter and does not return a value.
+
+Func<T,TResult> Delegate
+	-> Encapsulates a method that has one parameter and returns a value of the type specified by the TResult parameter.
+
+-- Action: 
+
+static void ConsolePrint(int i)
+{
+    Console.WriteLine(i);
+}
+
+static void Main(string[] args)
+{
+    Action<int> printActionDel = ConsolePrint;
+    printActionDel(10);
+}
+
+-- Func: 
+static int Sum(int x, int y)
+{
+    return x + y;
+}
+
+static void Main(string[] args)
+{
+    Func<int,int, int> add = Sum;
+
+    int result = add(10, 10);
+
+    Console.WriteLine(result); 
+}
+
+
 -> STATE is at the component level or can be passed between components
--> when you start writing more complex code, have complex projects you need to save State outside of the component :
+-> but when you start writing more complex code, have complex projects, you need to save State outside of the component :
 
 STATE STORE
+
+IDisposable	: Provides a mechanism for releasing unmanaged resources.
+Dispose()	: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+
+-- CounterStateManager.razor --
+
+
+
+
+
+-- CounterStore.cs --
+
