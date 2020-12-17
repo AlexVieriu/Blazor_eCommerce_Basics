@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.UseCases", "eShop.Use
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.DataStore", "eShop.DataStore\eShop.DataStore.csproj", "{652E81C7-89DA-4490-978B-7A051DCC9E71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "30_Component Rendering WebAssambly", "30_Component Rendering WebAssambly\30_Component Rendering WebAssambly.csproj", "{4E55A1DF-9A41-4F7F-92DC-41FCFEB2973F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "30_Component Rendering WebAssambly", "30_Component Rendering WebAssambly\30_Component Rendering WebAssambly.csproj", "{4E55A1DF-9A41-4F7F-92DC-41FCFEB2973F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "33. State Management with Observer Pattern", "33. State Management with Observer Pattern\33. State Management with Observer Pattern.csproj", "{E33FA813-5986-4CBA-9039-CC1B50D16661}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4E55A1DF-9A41-4F7F-92DC-41FCFEB2973F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E55A1DF-9A41-4F7F-92DC-41FCFEB2973F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E55A1DF-9A41-4F7F-92DC-41FCFEB2973F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E33FA813-5986-4CBA-9039-CC1B50D16661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E33FA813-5986-4CBA-9039-CC1B50D16661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E33FA813-5986-4CBA-9039-CC1B50D16661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E33FA813-5986-4CBA-9039-CC1B50D16661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

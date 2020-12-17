@@ -282,18 +282,55 @@ static void Main(string[] args)
 
 
 -> STATE is at the component level or can be passed between components
--> but when you start writing more complex code, have complex projects, you need to save State outside of the component :
+-> but when you start writing more complex code, have complex projects, you need to save State outside of the component 
+so every component in the page related to one another or NOT can access that STATE
 
-STATE STORE
 
 IDisposable	: Provides a mechanism for releasing unmanaged resources.
 Dispose()	: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 
+
+a. When access the Page
+- NavMenu
+	- OnInitialized
+- CounterStore
+	- AddStateChangeListeners
+- NavMenu
+	StateHasChanged(): Notifies the component that its state has changed. When applicable, this will
+						 cause the component to be re-rendered.
+
+
+
+-> we need to put breakpoint at every method to see the steps
+b. When we press counter button:
+
+- CounterStateManager
+	- IncremetCounter()
+- CounterStore
+	- BroadcastStateChange()
+- NavMenu
+- CounterStore
+	- GetState()
+- CounterState
+
+
+
 -- CounterStateManager.razor --
+UI:
+<button @onclick = "IncrementCounter">
+<p>@counterStore.GetState().Count</p>
 
-
-
+@code:
+OnInitialized()
+IncrementCounter()
+UpdateView()
+Dispose()
 
 
 -- CounterStore.cs --
 
+CounterState.cs
+Count { get; }
+ctor(int count)
+
+CounterStore.cs

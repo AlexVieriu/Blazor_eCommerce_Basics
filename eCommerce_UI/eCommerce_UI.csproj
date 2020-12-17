@@ -9,5 +9,9 @@
     <ProjectReference Include="..\eShop.DataStore\eShop.DataStore.csproj" />
     <ProjectReference Include="..\eShop.UseCases\eShop.UseCases.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Notes\03_Blazor In-Depth\34_Dependency Problems\" />
+  </ItemGroup>
 
 </Project>
