@@ -1,5 +1,10 @@
 ﻿23. Data Binding Part 1
 
+-> create a <label> and <textbox> to demosntait one-way and two-way databiding 
+-> create a checkbox
+-> create a radio button
+-> create a select element DropDownList
+
 -- Index.razor --
 
 UI:
