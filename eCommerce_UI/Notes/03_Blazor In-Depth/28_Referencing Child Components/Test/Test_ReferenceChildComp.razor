@@ -1,0 +1,16 @@
+﻿@if(isVisible)
+{
+   <h3>Ref Child Component</h3>
+}
+
+
+
+
+@code{
+    private bool isVisible;
+    public void Setvisibility()
+    {
+        this.isVisible = !this.isVisible;
+        StateHasChanged();
+    }
+}

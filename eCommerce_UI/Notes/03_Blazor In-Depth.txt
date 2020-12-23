@@ -36,13 +36,15 @@ a. Rounting Parameters
 b. Regular Parameters
 c. Cascading Parameters
 d. EventCallback
-e. Reference 
+e. Reference Parameters
 
 
 26. Review Parameters, Route Parameters and EventCallback
 
 I. Regular Parameters
 -> ex: in a foreach function we pass the parameter from the base component to the child component
+<RegularParameter Persons="persons" />
+"persons" can be: class, List<class>, Enum, .....
 
 II. Rounting Parameters
 -> pass parameter from one component to another: base comp	-> base component
@@ -51,8 +53,19 @@ ex: @page "/product/{id:int}"
 
 III. EventCallback
 
--> we create a parameter:	filter at the child component level and we pass it to the base component using 
-							EventCallback parameter
+-> fist we need a list of Customers(all of the list)
+-> filter the list using the child componet, and use EventCallBack to bring the filter to the base component
+
+
+-> create a child component:
+UI:
+label, input(text, @bind-value), button(@onclick)
+
+@code{
+	-> create a prop filter
+	-> create EventCallBack
+	-> create method: OnSearch.InvokeAsync(filter);
+}
 
 
 27. Cascading Parameters
@@ -62,8 +75,11 @@ III. EventCallback
 -> create a Base Component, with a button that pass the parameter to all his childs
 -> create Component1.razor, Component2.razor
 
--> StateHasChanged(): 
+BaseComponent:
+<CascadingValue Name="TestCounter" Value="counter">
 
+ChildComponent:
+[CascadingParameter(Name = "TestCounter")]
 
 
 28. Referencing Child Components
@@ -71,14 +87,17 @@ III. EventCallback
 -> base component can access the methods from the child component and use it 
 
 UI:
--> declare <Visibility> with the @ref so we can display it
 -> create a button that access the visibilityComponent method
+-> declare <Visibility> with the @ref so we can display it
 
 @code:
 -> write the @onclick event that access the method from the child component
 
 
 29. RenderFragment
+
+-> if we want to 
+
 
 -- RenderFrag --
 
@@ -112,7 +131,6 @@ RenderFragment Header
 RenderFragment Footer
 List<TItems> Items 
 RenderFragment<TItems> RepeaterItem 
-
 
 
 30. When does a component render

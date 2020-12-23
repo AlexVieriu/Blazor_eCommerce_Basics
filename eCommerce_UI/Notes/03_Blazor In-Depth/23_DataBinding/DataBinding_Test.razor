@@ -7,6 +7,8 @@
     -> create a select element DropDownList
 *@
 
+@using System.IO
+
 <div>
     <label for="textbox">Title: &nbsp; </label>
     <input type="text" id="textbox" @bind-value="@books.FirstOrDefault().Title" @bind-value:event="oninput">
@@ -27,13 +29,13 @@
 <br />
 
 <EditForm Model="book">
-    <InputRadioGroup Name="Title" @bind-Value="book.Title">
+    <InputRadioGroup Name="Title" @bind-Value="book.Id">
         <b>Book: </b>
-        <br />
+        <br />        
         @foreach(var item in books)
-        {
+        {            
             <InputRadio Value="item.Id" />
-                @(" " + item.Title)
+                @(" " + item.Id)
             <br/>
         }
     </InputRadioGroup>
@@ -42,9 +44,10 @@
 <br />
 
 <select style="width:25%">
+    <option value="0"></option>
     @foreach(var item in books)
     {
-        <option >@item.Title</option>
+        <option>@item.Title</option>
     }
 </select>
 
@@ -52,7 +55,7 @@
 @code{
 
     public List<Book> books;
-    public Book book = new();
+    public Book book = new();       
 
     public bool isActive = true;
 

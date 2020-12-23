@@ -1,0 +1,43 @@
+﻿@page "/rederFragment"
+
+
+
+<h3>Render Component</h3>
+<br />  
+
+<Test_RenderFragmentChild Items="persons" TItem="Person">
+    <Header>
+        <p>
+            <b>Welcome to the dark side</b>
+        </p>        
+    </Header>
+    <RepeterItem Context="item">
+        <p>Id: @item.Id</p>
+        <p>FirstName: @item.FirstName</p>
+        <p>LastName: @item.LastName</p>
+        <p>Age: @item.Age</p>
+    </RepeterItem>
+    <Footer>
+        <br />
+        <div>
+            <h6>We have cookies</h6>
+        </div>        
+    </Footer>
+</Test_RenderFragmentChild>
+
+
+@code{
+    private List<Person> persons = new List<Person>()
+    {
+        new () { Id = 1, FirstName = "Vieriu", LastName = "Alexandru", Age = 32},
+        new () { Id = 2, FirstName = "Dumitrascu", LastName = "Alexandru", Age = 33 },
+        new () { Id = 3, FirstName = "Cercel", LastName = "Cristian", Age = 42 },
+        new () { Id = 4, FirstName = "Popescu", LastName = "Cosmin", Age = 45 },
+    };
+
+
+}
+
+
+
+

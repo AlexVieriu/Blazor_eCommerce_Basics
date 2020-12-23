@@ -1,0 +1,18 @@
+﻿<div>
+    <label>First Name: &nbsp;</label>
+    <input type="text" @bind-value="filter" /> &nbsp;
+    <button class="btn btn-primary" @onclick="HandleSearch">Search</button>
+</div>
+
+
+@code{
+    private string filter;
+
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
+
+    public void HandleSearch()
+    {
+        OnSearch.InvokeAsync(filter);
+    }
+}

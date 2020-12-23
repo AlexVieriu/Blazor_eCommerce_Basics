@@ -1,0 +1,21 @@
+﻿@*@page "/cascadingParameters"*@
+
+<h3>Cascading Parameter</h3>
+
+<button class="btn btn-primary" @onclick="IncrementCounter">Counter</button>
+
+<br />
+
+<CascadingValue Name="Counter" Value="count">
+    <Test_Component1/>
+</CascadingValue>
+
+
+@code{
+    private int count;
+
+    public void IncrementCounter()
+    {
+        count++;
+    }
+}

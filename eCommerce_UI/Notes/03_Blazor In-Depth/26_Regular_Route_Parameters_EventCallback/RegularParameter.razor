@@ -1,0 +1,18 @@
+﻿<h3>Regular Components</h3>
+
+<br />
+<div>
+    <ul>
+        @foreach (var people in Persons)
+        {
+            <li>@people.Age</li>
+        }
+    </ul>
+</div>
+
+
+@code{
+    [Parameter]
+    public List<Person> Persons { get; set; }
+
+}

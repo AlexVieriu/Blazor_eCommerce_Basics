@@ -1,0 +1,70 @@
+﻿@page "/parameters"
+
+
+@*regular parameters*@
+
+<RegularParameter Persons="persons" />
+
+@*route parameters*@
+<hr />
+<h3>Route Parameter</h3>
+<br />
+<div>
+    @foreach(var person in persons)
+    {
+        <a href="@($"/routeparameters/{person.Id}")">@(person.FirstName + " " + person.LastName) </a>
+        <br />
+    }
+</div>
+
+
+@*EventCallback*@
+<hr />
+<h3>EventCallback</h3>
+<br />
+
+<EventCallBack OnSearch="FilterName" />
+
+<br />
+
+@if(personFiltered !=null && personFiltered.Count() > 0)
+{
+    <div>
+        @foreach(var person in personFiltered)
+        {
+            <ul>
+                <li>@(person.FirstName + ' ' + person.LastName)</li>
+            </ul>
+        }
+    </div>
+}
+
+
+
+@code{
+
+    private List<Person> persons;
+    private IEnumerable<Person> personFiltered;
+    private int Counter;
+
+    protected override void OnInitialized()
+    {
+        persons = new()
+        {
+            new Person() { Id = 1, FirstName = "Vieriu", LastName = "Alexandru", Age = 32},
+            new Person() { Id = 2, FirstName = "Dumitrascu", LastName = "Alexandru", Age = 33 },
+            new Person() { Id = 3, FirstName = "Cercel", LastName = "Cristian", Age = 42 },
+            new Person() { Id = 4, FirstName = "Popescu", LastName = "Cosmin", Age = 45 },
+        };
+    }
+
+    public void FilterName(string filter)
+    {
+        personFiltered = persons.Where(q => q.FirstName.ToLower().Contains(filter.ToLower()));
+    }
+
+    public void IncrementCounter()
+    {
+        Counter++;
+    }
+}

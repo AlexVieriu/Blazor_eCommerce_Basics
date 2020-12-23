@@ -1,0 +1,19 @@
+﻿@page "/refChildComp"
+<h3>Reference Component</h3>
+
+<br />
+<button class="btn btn-primary" @onclick="VisibilityChange">Visible</button>
+<br /><br />    
+<Test_ReferenceChildComp @ref="visibility"/>
+
+
+@code{
+    public Test_ReferenceChildComp visibility;
+
+    public void VisibilityChange()
+    {
+        visibility.Setvisibility();
+    }
+}
+
+
