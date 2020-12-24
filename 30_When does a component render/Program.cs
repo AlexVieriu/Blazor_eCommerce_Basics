@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _30_Component_Rendering_WebAssambly
+namespace _30_When_does_a_component_render
 {
     public class Program
     {

@@ -1,40 +1,33 @@
-﻿<hr />
-<div>
-    <p>Child component</p>
-</div>
-
+﻿@page "/"
 
 
 @code{
+
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         return base.SetParametersAsync(parameters);
     }
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         base.OnInitialized();
     }
 
     protected override void OnParametersSet()
     {
-        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         base.OnParametersSet();
     }
 
-    //////////////////////////////////////////////////////////////////////
+    ////////
+    ///
 
     protected override bool ShouldRender()
     {
-        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         return base.ShouldRender();
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
-        Console.WriteLine($"Child-OnParametersSet : {DateTime.Now}");
         base.OnAfterRender(firstRender);
     }
 }

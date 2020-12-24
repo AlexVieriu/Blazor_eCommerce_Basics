@@ -5,31 +5,37 @@
 <p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
 <br />
 
-<ChildComponent @ref="child">
-</ChildComponent>
+@*<Component Counter="currentCount">
+    <BodyTemplate>
+        <button @onclick="ClickBody">Click in BodyTemplate</button>
+    </BodyTemplate>
+</Component>*@
+
+<Component @ref="child"/>
 
 @code {
     private int currentCount = 0;
-    private ChildComponent child;
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
+    private Component child;
 
     private void IncrementCount()
     {
         currentCount++;
-        child.Counter = currentCount;
+        child.CounterManual = currentCount * 2;
         child.Refresh();
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
-        Console.WriteLine($"Rendered at time: {DateTime.Now}");
+        Console.WriteLine($"Counter - OnAfterRender at {DateTime.Now}");
     }
 
+    private void ClickBody()
+    {
+
+    }
 }

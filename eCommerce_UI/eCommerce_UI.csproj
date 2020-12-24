@@ -12,6 +12,7 @@
   
   <ItemGroup>
     <Folder Include="Notes\03_Blazor In-Depth\34_Dependency Problems\" />
+    <Folder Include="Notes\04_Dependency Injection\" />
   </ItemGroup>
 
 </Project>

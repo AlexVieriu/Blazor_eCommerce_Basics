@@ -135,6 +135,24 @@ RenderFragment<TItems> RepeaterItem
 
 30. When does a component render
 
+
+
+Debugging:
+I. In Visual Studio code:
+-- launchSettings.json --
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+
+II. In Browser:
+-> shift + alt + d
+-> copy link in Win + R
+-> shift + alt + d in the new Debugging Windows app
+(don't forget to delete the link from the previos point in: launchSettings.json)
+
+Link: https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&tabs=visual-studio
+
+
+https://blazor-university.com/components/component-lifecycles/
+
 a. When components are created
 	-> when you just come to the page
 	-> when you refresh the page
@@ -146,9 +164,9 @@ b. When components events are triggered
 	-> component rerender only for UI events: click button, changing a dropdownlist, ...
 	-> if we create an event or a delegate in c# and we want to trigger that event/delegate manually, 
 	it will not work, the component will not render
-	-> when a component UI are triggered, the components are rendered, but that UI event must be 
-	inside the component
-	-> if the event is outside of the component will not be rendered
+	-> the component will be rerendered only if the Event is inside the component, weill not work for 
+	the events outside the component
+
 ex1: if we have a button in the parent/child component, the child/parent component will not be rendered
 
 Solution/Exception: use RenderFragment to pass the event from the child to the parent, so the component rerender
@@ -172,40 +190,42 @@ public void Refresh()
     this.StateHasChanged();
 }
 
-Demo : Create a WebAssembly project
-
-Debugging:
-a. In Visual Studio
--- launchSettings.json --
-"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-
-b. In Browser
-https://www.youtube.com/watch?v=QgRwaw_RQ8w&ab_channel=ZiaA.Shaikh
-
-For more information:
-https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&tabs=visual-studio
-
 
 31. Component Lifecycle Events
+
 
 I. First time Rendering
 -> when the page is just loaded
 -> when you navigate to the component
 
-Methods: SetParameterAsync(), Oninitialized(), OnParameterSet()
+Methods: 
+-> SetParameterAsync()					: This method is executed whenever the parent renders.
 
-Server Side Blazor:
-Why they are rendered twice?
+-> OnInitialized / OnInitializedAsync	: Once the state from the ParameterCollection has been assigned to the 
+											component’s [Parameter] properties, these methods are executed
 
-Browser -> Request -> Server
-Browser <- Render 1 <- Server
+-> OnParametersSet/OnParametersSetAsync	: This method will be executed immediately after OnInitializedAsync 
+											if this is a new instance of a component
 
-Browser -> Signal R -> Server
-Browser <- Render 2 <- Server
+-> StateHasChanged						: This method flags the component to be rendered.
+										  A component will call this method whenever it wants to inform Blazor that changes 
+										  have occurred that would result in the rendered output being different.
 
-Blazor WebAssambly:
-Browser -> Request -> Server
-Browser <- Render 1 <- Server
+-> ShouldRender							: This method can be used to prevent the component’s RenderTree from being 
+										  recalculated by returning false
+										  * This method is not executed the first time the component is rendered
+
+-> BuildRenderTree						: This method renders the component’s content to an in-memory representation 
+										  of what should be rendered to the user.
+
+OnAfterRender / OnAfterRenderAsync		: These last two methods are executed every time Blazor has re-generated the 
+											component’s RenderTree.
+
+Dispose									: Although this isn’t strictly one of the ComponentBase’s lifecycle methods, 
+										  if a component implements IDisposable then Blazor will execute Dispose once 
+										  the component is removed from its parent’s render tree. To implement IDisposable 
+										  we need to add @implements IDisposable to our razor file.
+
 
 Methods:  OnAfterRender()
 
