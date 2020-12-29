@@ -23,7 +23,8 @@ namespace _38_Lifetime_Managment
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddScoped<ICustomerScoped, CustomerServices>();
+            services.AddSingleton<ICustomerSingleton, CustomerServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

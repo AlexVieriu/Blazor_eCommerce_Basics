@@ -1,29 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Lifetime_Managment.Model
 {
-    public class CustomerService : ICustomerService
+    public class CustomerServices : ICustomerScoped, ICustomerSingleton
     {
-        private List<Customer> customers;
-        public string UniqueId { get; set; }
+        public string singletonGuid { get; set; }
+        public string scopedGuid { get; set; }
 
-        public CustomerService()
+
+        public CustomerServices()
         {
-            UniqueId = Guid.NewGuid().ToString();
-
-            customers = new List<Customer>()
-             {
-                 new Customer{ Id=1, Name="Tom"},
-                 new Customer{ Id=1, Name="John"},
-                 new Customer{ Id=1, Name="Jane"}
-             };
-        }
-
-        public Customer GetCustomerById(int id)
-        {
-            return customers.FirstOrDefault(c => c.Id == id);
+            singletonGuid = Guid.NewGuid().ToString();
+            scopedGuid = Guid.NewGuid().ToString();
         }
     }
 }
+

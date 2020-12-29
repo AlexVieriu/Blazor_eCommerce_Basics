@@ -25,8 +25,44 @@ method create the dependent object
 
 -> AddTransient, AddSCoped, AddSingleton
 
--> when a component is instantiated, blazor app framework use de dependency injection and create 
+-> when a component is instantiated, blazor framework use de dependency injection and create 
 a new instance of the CustomerService class and give it to the component
+
 
 -- Index.razor --
 
+UI:
+-> inject the 2 interfaces: ICustomerScoped, ICustomerSingleton
+-> implement IDispose 
+-> create a table that display the 2 Guids
+
+@code{
+	Dispose()
+} 
+
+
+39. How to choose Lifetime Management
+
+Scoped:
+-> if you want to use some classes to use some data try to implement state management that way, you don't want to use Singleton
+because you are sharing the data across all users
+-> it is used for one particular connection
+-> can't be shared in different browsers
+
+
+40. Lifetime Management in Blazor WebAssembly
+
+-> is the same as in Blazor Server
+
+public static async Task Main(string[] args)
+{
+    var builder = WebAssemblyHostBuilder.CreateDefault(args);
+    builder.RootComponents.Add<App>("#app");
+
+    builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+    builder.Services.AddScoped<ICustomerScoped, CustomerServices>();
+    builder.Services.AddSingleton<ICustomerSingleton, CustomerServices>();
+
+    await builder.Build().RunAsync();
+}
