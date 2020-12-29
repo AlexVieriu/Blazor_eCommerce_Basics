@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Notes\04_Dependency Injection\**" />
+    <Content Remove="Notes\04_Dependency Injection\**" />
+    <EmbeddedResource Remove="Notes\04_Dependency Injection\**" />
+    <None Remove="Notes\04_Dependency Injection\**" />
+  </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\eShop.CoreBusiness\eShop.CoreBusiness.csproj" />
@@ -12,7 +19,6 @@
   
   <ItemGroup>
     <Folder Include="Notes\03_Blazor In-Depth\34_Dependency Problems\" />
-    <Folder Include="Notes\04_Dependency Injection\" />
   </ItemGroup>
 
 </Project>

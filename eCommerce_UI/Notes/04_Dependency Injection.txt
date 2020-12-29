@@ -1,1 +1,32 @@
-﻿
+﻿37. Dependency Injection
+
+https://www.youtube.com/watch?v=EPv9-cHEmQw&t=250s&ab_channel=TheSimpleEngineer
+
+-> what we usually see is class User will initialize a sql object and call methods to 
+create, read, update, delete information (ex: SaveChangesAsync, AddAsync, Remove, AnyAsync, Update)
+
+Inversion of Control(IoC)
+-> objects do not create other objects on which they rely to do their work, instead, 
+they get objects that they need from an outside source
+
+ex:
+-> instead of the User initialiazing another object, we have a framework that initialize 
+the DB object for us and pass it to us as a parameter 
+
+
+Depnedency Injection:
+-> passing a dependent object as a parameter to a method, rather than having the 
+method create the dependent object
+-> the methods does not have a direct dependency on a particular implementation
+-> any implementation that meets the requirements can be passed as a parameter
+
+
+38. Lifetime Management in Blazor Server
+
+-> AddTransient, AddSCoped, AddSingleton
+
+-> when a component is instantiated, blazor app framework use de dependency injection and create 
+a new instance of the CustomerService class and give it to the component
+
+-- Index.razor --
+
