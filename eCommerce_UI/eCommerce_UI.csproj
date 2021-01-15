@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Notes\03_Blazor In-Depth\34_Dependency Problems\**" />
     <Compile Remove="Notes\04_Dependency Injection\**" />
+    <Content Remove="Notes\03_Blazor In-Depth\34_Dependency Problems\**" />
     <Content Remove="Notes\04_Dependency Injection\**" />
+    <EmbeddedResource Remove="Notes\03_Blazor In-Depth\34_Dependency Problems\**" />
     <EmbeddedResource Remove="Notes\04_Dependency Injection\**" />
+    <None Remove="Notes\03_Blazor In-Depth\34_Dependency Problems\**" />
     <None Remove="Notes\04_Dependency Injection\**" />
   </ItemGroup>
   
@@ -15,10 +19,6 @@
     <ProjectReference Include="..\eShop.CoreBusiness\eShop.CoreBusiness.csproj" />
     <ProjectReference Include="..\eShop.DataStore\eShop.DataStore.csproj" />
     <ProjectReference Include="..\eShop.UseCases\eShop.UseCases.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Notes\03_Blazor In-Depth\34_Dependency Problems\" />
   </ItemGroup>
 
 </Project>

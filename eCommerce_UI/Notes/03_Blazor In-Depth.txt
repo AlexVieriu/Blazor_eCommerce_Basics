@@ -1,6 +1,6 @@
 ﻿23. Data Binding Part 1
 
--> create a <label> and <textbox> to demosntait one-way and two-way databiding 
+-> create a <label> and <textbox> to demonstait one-way and two-way databiding 
 -> create a checkbox
 -> create a radio button
 -> create a select element DropDownList
@@ -24,6 +24,49 @@ CheckBox:
 
 private bool isActive;
 Product product = new Product(){....};
+
+Radio Component:
+
+https://youtu.be/Yp1WmfjadMw?t=1597
+https://www.learmoreseekmore.com/2020/12/blazorwasm-inputradiogroup-overview.html
+https://stackoverflow.com/questions/65275006/microsoft-aspnetcore-components-forms-inputradiogroup-does-not-support-the-type
+
+
+Method 1
+<label>
+    <input type="radio" name="group" value="1" @onclick="@(()=> selectedGroup = 1)"/> 1
+</label>
+<label>
+    <input type="radio" name="group" value="2" @onclick="@(()=> selectedGroup = 2)"/> 2
+</label>
+
+
+Method 2:
+<EditForm Model="enumNames">
+    <p>Item selected: @enumNames</p>
+    <InputRadioGroup @bind-Value="enumNames">
+        @foreach (var item in (EnumNames[])Enum.GetValues(typeof(EnumNames)))
+        {
+            <InputRadio Value="item" />
+            @(" " + item)
+            <br />
+        }
+    </InputRadioGroup>
+</EditForm>
+
+
+Method 3:
+<EditForm Model="newCustomerObj">
+    <p>Item selected: @newCustomerObj.Name</p>
+    <InputRadioGroup @bind-Value="newCustomerObj.Name">
+        @foreach (var item in customers)
+        {
+            <InputRadio Value="item.Name" />
+            @(" " + item.Name)
+            <br />
+        }
+    </InputRadioGroup>
+</EditForm>
 
 
 25. Overview of Communication between Components

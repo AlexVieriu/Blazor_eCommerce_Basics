@@ -1,0 +1,28 @@
+﻿@page "/databinding/radiobutton" 
+
+
+
+@*Method 1*@ 
+<div>
+    <p>Item selected: @Name</p>
+    
+    <input type="radio" name="NameGroup" value="1" @onclick="@(() => Name = "Alex")"/> Alex 
+    
+    <br />
+    <input type="radio" name="NameGroup" value="2" @onclick="@(()=> Name = "Alina")"/> Alina
+</div>
+
+@*Method 2*@
+
+
+@*Method 3*@
+
+
+
+
+
+
+
+@code{
+    private string Name;
+}

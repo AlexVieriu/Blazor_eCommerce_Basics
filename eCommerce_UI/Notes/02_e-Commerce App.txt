@@ -10,9 +10,9 @@ Sparation of concerns : -> Business Layer		(Model)
 State, View, Event -> are in the same file
 
 -> in razor pages we have all 3 in the same file
--> in this case razor file will become very big, very quickly so we need to make the components as small as possible
+-> in this case razor file will become very big, very quickly, so we need to make the components as small as possible
 
-a. search component
+a. Search component
 b. Product item component
 
 
@@ -37,7 +37,7 @@ Sparation of concerns:
 DataRepository:	-> a repository class is where we encapsulate all of the data access code, 
 				so we don't need to write those code in the app in the app logic layer
 
--> in a clean arhitecture Blazor belong to the UI interface
+-> in a clean arhitecture, Blazor belong to the UI interface
 
 
 11. Implementing Core Business Layer
@@ -47,7 +47,7 @@ DataRepository:	-> a repository class is where we encapsulate all of the data ac
 -> Models -> Products.cs: Id, Brand, Name, Price, ImageLink, Description
 
 Core business logic: 
--> core business logic exists with or without the existence of the application
+-> core business logic exists with/without the existence of the application
 
 
 12. Implementing Use Cases Layer
@@ -64,6 +64,8 @@ ViewProductScreen	:
 13. Data Store Plugin Interface
 
 -- eShop.UseCases -- 
+
+-> in order to the DataStore to plugin to the UseCases. we need to define interfaces inside UseCases Layer
 
 PluginInterfaces -> DataStore -> IProductRepository.cs : IEnumerable<Product> Products (string filter)
 														 Product Product(int id)
@@ -90,7 +92,7 @@ PluginInterfaces -> DataStore -> IProductRepository.cs : IEnumerable<Product> Pr
 
 14. Implementing In-Memory Data Store Plugin
 
--> database or data store are IO devices
+-> database or datastore are IO devices
 -> any IO devices should be implemented as plug-ins
 
 
@@ -142,6 +144,7 @@ Pages-> Components -> SearchProduct.razor
 -- SearchProduct.razor --
 
 @inject ISearchProduct 
+
 
 -> call the Execute() method from dipendecy injections so we can access the list of Products
 @code{
@@ -238,6 +241,7 @@ Boostrap site: https://getbootstrap.com/docs/4.0/components/forms/
 
 class="form-group mx-sm-3 mb-2"
 mx-sm-3 : https://getbootstrap.com/docs/4.0/utilities/spacing/
+
 
 21. View Product Details Component
 
