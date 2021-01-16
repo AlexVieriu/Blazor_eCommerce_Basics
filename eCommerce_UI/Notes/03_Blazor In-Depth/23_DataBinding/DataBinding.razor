@@ -2,11 +2,8 @@
 
 
 <div>
-    Product Name:
-    <p>@product.Name</p>
+    <p>Product Name: &nbsp;   @product.Name</p>
 </div>
-
-<br />
 
 <div>
     <label>TextBox: &nbsp;</label>
@@ -16,6 +13,7 @@
 <br />
 <hr />
 
+<h5>CheckBock</h5>
 <input type="checkbox" name="CheckBoxDemo" @bind-value="isActive" />&nbsp; @isActive
 
 <br />
@@ -40,8 +38,6 @@
 </p>
 
 
-
-
 @code{
     private Product product = new Product { Id = 495, Brand = "maybelline", Name = "Maybelline Face Studio Master Hi-Light Light Booster Bronzer", Price = 14.99, ImageLink = "https://d3t32hsnjxo7q6.cloudfront.net/i/991799d3e70b8856686979f8ff6dcfe0_ra,w158,h184_pa,w158,h184.png", Description = "Maybelline Face Studio Master Hi-Light Light Boosting bronzer formula has an expert  balance of shade + shimmer illuminator for natural glow. Skin goes  soft-lit with zero glitz.    For Best Results: Brush over all shades in palette and gently sweep over  cheekbs, brow bs, and temples, or anywhere light naturally touches  the face." };
 
@@ -55,5 +51,6 @@
         new Product { Id = 468, Brand = "maybelline", Name = "Maybelline Face Studio Master Hi-Light Light Booster Blush", Price = 14.99, ImageLink = "https://d3t32hsnjxo7q6.cloudfront.net/i/4621032a92cb428ad640c105b944b39c_ra,w158,h184_pa,w158,h184.png", Description = "Maybelline Face Studio Master Hi-Light Light Boosting blush formula has an expert  balance of shade + shimmer illuminator for natural glow. Skin goes  soft-lit with zero glitz.    For Best Results: Brush over all shades in palette and gently sweep over  cheekbs, brow bs, and temples, or anywhere light naturally touches  the face."},
         new Product { Id = 439, Brand = "maybelline", Name = "Maybelline Fit Me Blush", Price = 10.29, ImageLink = "https://d3t32hsnjxo7q6.cloudfront.net/i/53d5f825461117c0d96946e1029510b0_ra,w158,h184_pa,w158,h184.png", Description = "Maybelline Fit Me Blush has lightweight pigments blend easily and wear evenly. It provides a natural, fade-proof cheek color that leaves skin the way it was meant to be...fresh, breathing, and natural.  For Best Results: For soft, natural look, brush along cheekb, sweeping upward."}
     };
+
     private int selectedItem = 0;
 }

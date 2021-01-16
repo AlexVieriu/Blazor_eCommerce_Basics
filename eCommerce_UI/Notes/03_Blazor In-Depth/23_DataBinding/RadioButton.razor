@@ -1,28 +1,81 @@
-﻿@page "/databinding/radiobutton" 
-
-
-
-@*Method 1*@ 
+﻿@page "/databinding/radiobutton"
+@*Method 1*@
 <div>
-    <p>Item selected: @Name</p>
-    
-    <input type="radio" name="NameGroup" value="1" @onclick="@(() => Name = "Alex")"/> Alex 
-    
+    <p>Item selected: @name</p>
+    <input type="radio" name="NameGroup" value="1" @onclick="@(() => name = "Alex")" /> Alex
     <br />
-    <input type="radio" name="NameGroup" value="2" @onclick="@(()=> Name = "Alina")"/> Alina
+    <input type="radio" name="NameGroup" value="2" @onclick="@(()=> name = "Alina")" /> Alina
 </div>
 
-@*Method 2*@
+<hr />
 
+@*Method 2*@
+@*Construim un enum
+    Creem un Enum separat cu valori,
+    creem un ForEach care cauta STATIC valorile din EnumNames,
+    luam valorile din el <InputRadio> si le legam cu <InputRadioGroup> la Noul Enum creat (enumNames)*@
+
+<div>
+    <EditForm Model="enumNames">
+        <p>Item selected: @enumNames</p>
+        <InputRadioGroup @bind-Value="enumNames">
+            @foreach (var item in (EnumNames[])Enum.GetValues(typeof(EnumNames)))
+            {
+                <InputRadio Value="item" />
+                @(" " + item)
+                <br />
+            }
+        </InputRadioGroup>
+    </EditForm>
+</div>
+
+<hr />
 
 @*Method 3*@
+@*Cand vrem sa facem un Radio Button cu o List<Customer> din baza de date*@
 
-
-
-
+<div>
+    <EditForm Model="newCustomerObj">
+        <p>Item selected: @newCustomerObj.Name</p>
+        <InputRadioGroup @bind-Value="newCustomerObj.Name">
+            @foreach (var item in customers)
+            {
+                <InputRadio Value="item.Name" />
+                @(" " + item.Name)
+                <br />
+            }
+        </InputRadioGroup>
+    </EditForm>
+</div>
 
 
 
 @code{
-    private string Name;
+    // Method 1
+    private string name;
+
+
+    // Method 2
+    public enum EnumNames { Alex, Ion, Alina, Cristi, Alexandra }
+
+    EnumNames enumNames = new();
+
+
+    // Method 3
+
+    public class Customer
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
+
+    private List<Customer> customers = new()
+    {
+            new Customer() { Name = "Alex" },
+            new Customer() { Name = "Alina" },
+            new Customer() { Name = "Dumi" },
+            new Customer() { Name = "Cristi" }
+        };
+
+    private Customer newCustomerObj = new();
 }
