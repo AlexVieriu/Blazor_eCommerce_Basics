@@ -141,7 +141,6 @@ UI:
 
 -> if we want to 
 
-
 -- RenderFrag --
 
 UI: 
@@ -176,8 +175,7 @@ List<TItems> Items
 RenderFragment<TItems> RepeaterItem 
 
 
-30. When does a component render
-
+30. When does a component render(for Web Assembly project)
 
 
 Debugging:
@@ -194,7 +192,7 @@ II. In Browser:
 Link: https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&tabs=visual-studio
 
 
-https://blazor-university.com/components/component-lifecycles/
+Component LifeCycle: https://blazor-university.com/components/component-lifecycles/
 
 a. When components are created
 	-> when you just come to the page
@@ -207,10 +205,10 @@ b. When components events are triggered
 	-> component rerender only for UI events: click button, changing a dropdownlist, ...
 	-> if we create an event or a delegate in c# and we want to trigger that event/delegate manually, 
 	it will not work, the component will not render
-	-> the component will be rerendered only if the Event is inside the component, weill not work for 
+	-> the component will be rerendered only if the Event is inside the component, will not work for 
 	the events outside the component
 
-ex1: if we have a button in the parent/child component, the child/parent component will not be rendered
+ex1: if we have a button in the parent component, the child component will not be rendered(and vis versa)
 
 Solution/Exception: use RenderFragment to pass the event from the child to the parent, so the component rerender
 					
@@ -243,12 +241,19 @@ I. First time Rendering
 
 Methods: 
 -> SetParameterAsync()					: This method is executed whenever the parent renders.
+										  The base.SetParametersAsync method must be executed before any await instructions 
+										  in the method, otherwise an InvalidOperationException will be thrown.
 
 -> OnInitialized / OnInitializedAsync	: Once the state from the ParameterCollection has been assigned to the 
 											component’s [Parameter] properties, these methods are executed
+										  This method is only executed once when the component is first created. If the parent 
+										  changes the component’s parameters at a later time, this method is skipped.
 
 -> OnParametersSet/OnParametersSetAsync	: This method will be executed immediately after OnInitializedAsync 
 											if this is a new instance of a component
+										  If it is an existing component that is being re-rendered because its parent is 
+										  re-rendering then the OnInitialized* methods will not be executed, and this method 
+										  will be executed immediately after SetParametersAsync instead.
 
 -> StateHasChanged						: This method flags the component to be rendered.
 										  A component will call this method whenever it wants to inform Blazor that changes 
@@ -263,6 +268,8 @@ Methods:
 
 OnAfterRender / OnAfterRenderAsync		: These last two methods are executed every time Blazor has re-generated the 
 											component’s RenderTree.
+										  It is not until after the OnAfterRender methods have executed that it is safe to 
+										  use any references to components set via the @ref directive.
 
 Dispose									: Although this isn’t strictly one of the ComponentBase’s lifecycle methods, 
 										  if a component implements IDisposable then Blazor will execute Dispose once 
