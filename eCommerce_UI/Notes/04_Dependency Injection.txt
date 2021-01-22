@@ -1,44 +1,59 @@
-﻿37. Dependency Injection
+﻿https://www.youtube.com/watch?v=EPv9-cHEmQw&t=250s&ab_channel=TheSimpleEngineer
 
-https://www.youtube.com/watch?v=EPv9-cHEmQw&t=250s&ab_channel=TheSimpleEngineer
+Dependency:
+-> Class A depend on Class B to function
 
 -> what we usually see is class User will initialize a sql object and call methods to 
 create, read, update, delete information (ex: SaveChangesAsync, AddAsync, Remove, AnyAsync, Update)
 
+Procedural Programming Flow of Control
+-> Concrete implementation(BAD)
+-> we can't run UnitTest
+
 Inversion of Control(IoC)
 -> objects do not create other objects on which they rely to do their work, instead, 
 they get objects that they need from an outside source
+-> Abstract implementaion(GOOD)
 
 ex:
 -> instead of the User initialiazing another object, we have a framework that initialize 
 the DB object for us and pass it to us as a parameter 
 
-
-Depnedency Injection:
+DepEndency Injection:
 -> passing a dependent object as a parameter to a method, rather than having the 
 method create the dependent object
 -> the methods does not have a direct dependency on a particular implementation
 -> any implementation that meets the requirements can be passed as a parameter
 
 
+What Dependency Injection do at the Framwork level:
+
+servicies.AddSingleton<User, OracleDatabase>;
+
+User user = new User();
+
+
+37. Dependency Injection in Razor Components
+
+
+
+
 38. Lifetime Management in Blazor Server
 
--> AddTransient, AddSCoped, AddSingleton
+-> AddTransient, AddSCoped, AddSingleton : https://www.youtube.com/watch?v=01C8selSVCY&ab_channel=RawCoding
 
--> when a component is instantiated, blazor framework use de dependency injection and create 
-a new instance of the CustomerService class and give it to the component
+Singleton:
+-> caching Servicies
+-> Global Configuration
+-> Business Rules
+-> HttpClients 
+-> Persisting stat that's usefull for the runtine of the app
+
+Scoped:
+->Persisting state throughtout app per request
 
 
--- Index.razor --
 
-UI:
--> inject the 2 interfaces: ICustomerScoped, ICustomerSingleton
--> implement IDispose 
--> create a table that display the 2 Guids
-
-@code{
-	Dispose()
-} 
 
 
 39. How to choose Lifetime Management

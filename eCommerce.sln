@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "30_When does a component re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "38 Lifetime Managment", "38 Lifetime Managment\38 Lifetime Managment.csproj", "{B6F7E38E-BFAE-4AE3-8DD0-8950F170B216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "37 Dependency Injection", "37 Dependency Injection\37 Dependency Injection.csproj", "{E884FC55-66F6-47BE-A84A-06D38FEB89EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "37 Dependency Injection", "37 Dependency Injection\37 Dependency Injection.csproj", "{E884FC55-66F6-47BE-A84A-06D38FEB89EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{ED960E8B-19F3-4646-9B39-2F3B4859A7D7}"
 EndProject

@@ -1,4 +1,4 @@
-using Lifetime_Managment.Model;
+using _38_Lifetime_Managment.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,8 +23,9 @@ namespace _38_Lifetime_Managment
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddScoped<ICustomerScoped, CustomerServices>();
-            services.AddSingleton<ICustomerSingleton, CustomerServices>();
+            services.AddTransient<ITransientService, TransientService>();
+            services.AddScoped<IScopedService, ScopedService>();
+            services.AddSingleton<ISingletopService, SingletopService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,10 +7,10 @@ namespace _37_Dependency_Injection
         static void Main(string[] args)
         {
             var user = new User();
-            user.add("This is some data");
+            user.Add();
 
-            var user_IoC = new User_IoC(new OracleDatabase());
-            user_IoC.add("This is some data");
+            var user_IoC = new User_IoC(new MySqlDabase());
+            user_IoC.Add();
 
             Console.ReadLine();
         }
@@ -25,9 +25,9 @@ namespace _37_Dependency_Injection
         {
             database = new SqlServerDatabase();
         }
-        public void add(string data)
+        public void Add()
         {
-            database.Persist(data);
+            database.Persist();
         }
     }
 
@@ -35,37 +35,44 @@ namespace _37_Dependency_Injection
     public class User_IoC
     {
         private readonly Database _database;
-
         public User_IoC(Database database)
         {
             _database = database;
         }
-        public void add(string data)
+        public void Add()
         {
-            _database.Persist(data);
+            _database.Persist();
         }
     }
 
     // Database Access Layer
     public class SqlServerDatabase          // Bad way
     {
-        public void Persist(string data)
+        public void Persist()
         {
-            Console.WriteLine("SqlServer has persisted: " + data);
+            Console.WriteLine("SqlServer Database");
         }
     }
 
     public class OracleDatabase : Database  // Good way
     {
-        public void Persist(string data)
+        public void Persist()
         {
-            Console.WriteLine("Oracle has persisted: " + data);
+            Console.WriteLine("Oracle Database");
+        }
+    }
+
+    public class MySqlDabase : Database
+    {
+        public void Persist()
+        {
+            Console.WriteLine("MySql Database");
         }
     }
 
     public interface Database
     {
-        public void Persist(string data);
+        public void Persist();
     }
 
 
