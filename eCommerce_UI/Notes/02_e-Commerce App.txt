@@ -4,7 +4,7 @@
 
 MVC:
 Sparation of concerns : -> Business Layer		(Model)
-						-> PresentationLayer	(View)						
+						-> Presentation Layer	(View)						
 						-> Resource Access Layer(Controller)
 
 State, View, Event -> are in the same file
@@ -12,16 +12,44 @@ State, View, Event -> are in the same file
 -> in razor pages we have all 3 in the same file
 -> in this case razor file will become very big, very quickly, so we need to make the components as small as possible
 
-a. Search component
-b. Product item component
+
+Project Structure:
+-> eShop.Web.Models		-> eShop.Web.AdminPortal 
+						-> eShop.Web.Common
+						-> eShop.Web.CustomerPortal			-> SearchBarComp.razor
+															-> SearchProductComp.razor
+															-> ShoppingCardComp.razor
+															-> ViewProductComp.razor
+
+-> Plugins				-> eShop.DataStore					-> ProductRepository.cs
+						-> eShop.ShoppingCard.LocalStorage	-> ShoppingCard.cs
+						-> eShop.StateStore.DI				-> ShoppingCardStateStore.cs
+															-> StateStoreBase.cs
+
+-> eShop.CoreBusiness	-> Models	: Order.cs, OrderLineItem.cs, Product.cs
+						-> Services	: IOrderService.cs, OrderService.cs
+
+-> eShop.UseCases		-> PluginInterfaces		-> DataStore	: IProductRepository
+												-> StateStore	: IShoppingCardStateStore, IStateStore
+												-> UI			: IShoppingCard
+
+						-> SearchProductScreen	: ISearchProductUseCase, SearchProductUseCase
+
+						-> ShoppingCardScreen	: IViewShoppingCardUseCase, ViewShoppingCardUseCase
+
+						-> ViewProductScreen	: AddProductToCardUseCase, ViewProductUseCase
+
+												  IAddProductToCardUseCase, IViewProductUseCase
+-> eShop.Web			
 
 
 10. Analysis and Design
 
 Clean arhitecture:
 
-a. Application business logic	: everything starts with use cases
-b. Domain business logic		:
+a. Application business logic	: everything starts with use cases (SearchProductScreen, ShoppingCardScreen..)
+b. Domain business logic		: Models   (Order.cs, Product.cs, OrderLineItems.cs,)
+								  Services (IOrderService.cs, OrderService.cs -> validations)
 
 Search Product Page:-> Search Product 
 					-> View Product
@@ -30,12 +58,12 @@ View Product Page  :-> Navigate Back to Search
 
 -> we have 2 pages with 3 use cases (no domain business logic)
 
-Sparation of concerns:
+Separation of concerns:
 -> put the UI in separet project 
 -> put the bussines logic in other projects/libraries
 
 DataRepository:	-> a repository class is where we encapsulate all of the data access code, 
-				so we don't need to write those code in the app in the app logic layer
+				so we don't need to write those code in the the Application business logic layer
 
 -> in a clean arhitecture, Blazor belong to the UI interface
 
@@ -47,7 +75,7 @@ DataRepository:	-> a repository class is where we encapsulate all of the data ac
 -> Models -> Products.cs: Id, Brand, Name, Price, ImageLink, Description
 
 Core business logic: 
--> core business logic exists with/without the existence of the application
+-> core business logic exists with/without the existence of the application ???
 
 
 12. Implementing Use Cases Layer
@@ -65,7 +93,7 @@ ViewProductScreen	:
 
 -- eShop.UseCases -- 
 
--> in order to the DataStore to plugin to the UseCases. we need to define interfaces inside UseCases Layer
+-> in order to access the DataStore inside UseCases, we need to define interfaces inside UseCases Layer
 
 PluginInterfaces -> DataStore -> IProductRepository.cs : IEnumerable<Product> Products (string filter)
 														 Product Product(int id)
@@ -111,7 +139,7 @@ PluginInterfaces -> DataStore -> IProductRepository.cs : IEnumerable<Product> Pr
 		return Products.FirstOrDefault(x=> x.Id == id);
 	}
 
--> return the Products with the name put in the filter:
+-> return the Products with filter:
 	public IEnumerable<Product> GetProducts(string filter)
 	{
 		if(string.IsWhiteSpaceOrNull(filter))
@@ -192,12 +220,14 @@ UI:
 -> HandleSearch()
 
 
--> to pass the event in the component to the parent component we need use EventCallBack
+-> use EventCallBack to pass the filter properti from the Child to Base Component
 EventCallBack: 
 
-InvokeAsync: invokes the delegate associated with this binding and dispatches an event notification to the appropriate component.
+InvokeAsync: invokes the delegate associated with this binding and dispatches an event 
+			 notification to the appropriate component.
 
--> we use a method SearchHandler() to pass the property field to the parent component by using an EventCallback : OnSearch
+-> we use a method SearchHandler() to pass the property field to the parent component 
+by using an EventCallback : OnSearch
 
 
 18. Implementing Product Item Component
@@ -226,7 +256,6 @@ so they will be initialized in the child component
 	}
 
 -> Execute() is in:  eShop.UseCases-> SearchPruductScreen -> SearchProduct.cs
-
 
 
 20. Styling with Bootstrap

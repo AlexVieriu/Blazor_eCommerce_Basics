@@ -96,6 +96,8 @@ ex: @page "/product/{id:int}"
 
 III. EventCallback
 
+-> we use this method when we want to transfer data(filter, List<Customer>, ...) from Child to Base component
+
 -> fist we need a list of Customers(all of the list)
 -> filter the list using the child componet, and use EventCallBack to bring the filter to the base component
 
@@ -127,7 +129,7 @@ ChildComponent:
 
 28. Referencing Child Components
 
--> base component can access the methods from the child component and use it 
+-> we use this when we want to call Child methods, properties from the Base component
 
 UI:
 -> create a button that access the visibilityComponent method
@@ -175,9 +177,9 @@ List<TItems> Items
 RenderFragment<TItems> RepeaterItem 
 
 
-30. When does a component render(for Web Assembly project)
+30. When does a component render
 
-
+-- Web Assembly project -- 
 Debugging:
 I. In Visual Studio code:
 -- launchSettings.json --
@@ -191,13 +193,13 @@ II. In Browser:
 
 Link: https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&tabs=visual-studio
 
-
 Component LifeCycle: https://blazor-university.com/components/component-lifecycles/
 
 a. When components are created
 	-> when you just come to the page
 	-> when you refresh the page
-	-> when you navigate away from the component/page and come back to the page that contains the that component/page 
+	-> when you navigate away from the component/page and come back to the page that 
+	   contains the that component/page 
 
 b. When components events are triggered
 	-> even if we comment : currentCount++ , the component is still triggered
@@ -233,6 +235,8 @@ public void Refresh()
 
 
 31. Component Lifecycle Events
+
+Component LifeCycle: https://blazor-university.com/components/component-lifecycles/
 
 
 I. First time Rendering
@@ -281,6 +285,31 @@ Methods:  OnAfterRender()
 
 -> after all of this the page is LOADED
 -> the double loading happens when the app is loaded for the very first time !!
+
+The code Blazor executes on await inside an async method will only be executed on the first await. 
+Subsequent awaits will not cause multiple renders. For example: 
+
+protected override async Task OnParametersSetAsync()
+{
+  // Automatically renders when next line starts to await
+  await Task.Delay(1000); 
+  // No automatic render when next line starts to await
+  await Task.Delay(1000); 
+  // No automatic render when next line starts to await
+  await Task.Delay(1000); 
+}
+
+protected override async Task OnParametersSetAsync()
+{
+  // Automatically renders when next line starts to await
+  await Task.Delay(1000); 
+  // Explicitly render when next line starts to await
+  StateHasChanged();
+  await Task.Delay(1000); 
+  // Explicitly render when next line starts to await
+  StateHasChanged();
+  await Task.Delay(1000); 
+}
 
 
 II. Rerendering

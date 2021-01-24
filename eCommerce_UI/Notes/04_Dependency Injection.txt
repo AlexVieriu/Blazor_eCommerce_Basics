@@ -33,9 +33,6 @@ servicies.AddSingleton<User, OracleDatabase>;
 User user = new User();
 
 
-37. Dependency Injection in Razor Components
-
-
 
 
 38. Lifetime Management in Blazor Server

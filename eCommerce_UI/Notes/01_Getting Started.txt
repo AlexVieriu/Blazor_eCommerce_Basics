@@ -4,7 +4,7 @@ HttpRequest is incapsulated in HttpContext logic.
 
 -> middleware should be made according to the single resposibility principale
 
--> Asp.Net Core, the Web server is a console app that runs in a infinite loop while,
+-> Asp.Net Core, the Web server is a console app that runs in a infinite while loop,
 listening to Httprequests 
 
 -> in .net core they are 3 app framework: MVC, RazorPages, Blazor
@@ -15,7 +15,7 @@ MVC web app or wep API :
 -> model classes, razor views, controller methods
 
 Razer pages:
--> razor view, coresponde code behind model classes
+-> razor view, corespond code behind model classes
 
 Blazor pages:
 -> blazor components(razor components)
@@ -23,10 +23,9 @@ Blazor pages:
 
 3. How a Blazor App is Bootstrapped
 
-
 -- Program.cs --
 
-.Run() -> runs in a infinite loop and listen to HttpRequests and process the request 
+.Run() -> runs in a infinite loop, listen to HttpRequests and process the request 
 
 
 -- Startup.cs
@@ -53,6 +52,27 @@ App.razor		-> the route component
 													display the main layout component								
 
 <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+
+<Contex> : is a RanderFragment in the <Found> child component
+
+All the Blazor Libraries: 
+https://docs.microsoft.com/en-us/dotnet/api/?view=aspnetcore-5.0
+
+Microsoft.AspNetCore.Routing Namespace
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.routing?view=aspnetcore-5.0
+
+Microsoft.AspNetCore.Components
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components?view=aspnetcore-5.0
+
+<Router>
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.routing.router?view=aspnetcore-5.0
+
+<RouteView>
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.routeview?view=aspnetcore-5.0
+
+<LayoutView>
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.layoutview?view=aspnetcore-5.0
+
 
 -- MainLayout.razor
 
