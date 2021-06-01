@@ -1,0 +1,49 @@
+﻿@page "/lifeCycleEventsComp"
+
+<br />
+<button class="btn btn-primary" @onclick="OnClick">Count</button>
+<br /><br />
+Count: @count
+<br />
+<br />
+<ChildComp Count="count" />
+
+
+@code{
+    private int count = 0;
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        return base.SetParametersAsync(parameters);
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    ////////////////////////
+
+    protected override bool ShouldRender()
+    {
+        return base.ShouldRender();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        Console.WriteLine($"Counter - OnAfterReder at {DateTime.Now}");
+    }
+
+
+    public void OnClick()
+    {
+        count++;
+        StateHasChanged();
+    }
+}

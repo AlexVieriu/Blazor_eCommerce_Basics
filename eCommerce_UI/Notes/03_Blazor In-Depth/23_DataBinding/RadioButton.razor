@@ -16,14 +16,29 @@
     luam valorile din el <InputRadio> si le legam cu <InputRadioGroup> la Noul Enum creat (enumNames)*@
 
 <div>
+    <strong>Enum Method with Name </strong>
     <EditForm Model="enumNames">
-        <p>Item selected: @enumNames</p>
-        <InputRadioGroup @bind-Value="enumNames">
+        <p>Item selected: @(enumNames)</p>
+        <InputRadioGroup @bind-Value="(enumNames)">
             @foreach (var item in (EnumNames[])Enum.GetValues(typeof(EnumNames)))
             {
                 <InputRadio Value="item" />
-                @(" " + item)
-                <br />
+                <span>@item</span><br />
+            }
+        </InputRadioGroup>
+    </EditForm>
+
+    <br />
+
+    <strong>Enum Method with values </strong>
+
+    <EditForm Model="enumNumbers">
+        <p>Item selected: @(enumNumbers)</p>
+        <InputRadioGroup @bind-Value="(enumNumbers)">
+            @foreach (var item in (EnumNames[])Enum.GetValues(typeof(EnumNames)))
+            {
+                <InputRadio Value="(Convert.ToInt32(item))" />
+                <span>@item</span><br />
             }
         </InputRadioGroup>
     </EditForm>
@@ -35,14 +50,14 @@
 @*Cand vrem sa facem un Radio Button cu o List<Customer> din baza de date*@
 
 <div>
-    <EditForm Model="newCustomerObj">
-        <p>Item selected: @newCustomerObj.Name</p>
-        <InputRadioGroup @bind-Value="newCustomerObj.Name">
-            @foreach (var item in customers)
+    <strong>Class method</strong>
+    <EditForm Model="customer">
+        <p>Item Selected: @customer.Name</p>
+        <InputRadioGroup @bind-Value="customer.Name">
+            @foreach (var customer in customers)
             {
-                <InputRadio Value="item.Name" />
-                @(" " + item.Name)
-                <br />
+                <InputRadio Value="customer.Name" />
+                <span>@customer.Name</span><br />
             }
         </InputRadioGroup>
     </EditForm>
@@ -59,6 +74,7 @@
     public enum EnumNames { Alex, Ion, Alina, Cristi, Alexandra }
 
     EnumNames enumNames = new();
+    EnumNames enumNumbers = new();
 
 
     // Method 3
@@ -71,11 +87,11 @@
 
     private List<Customer> customers = new()
     {
-            new Customer() { Name = "Alex" },
-            new Customer() { Name = "Alina" },
-            new Customer() { Name = "Dumi" },
-            new Customer() { Name = "Cristi" }
-        };
+        new Customer() { Name = "Alex" },
+        new Customer() { Name = "Alina" },
+        new Customer() { Name = "Dumi" },
+        new Customer() { Name = "Cristi" }
+    };
 
-    private Customer newCustomerObj = new();
+    private Customer customer = new();
 }
