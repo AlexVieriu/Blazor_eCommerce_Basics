@@ -1,21 +1,22 @@
 ﻿@page "/parameters"
-
 @*
-Regular parameters  : display a list of persons in a table in a childComponents
-Route   parameters  : display a person passing the Id as a route parameters
-EventCallback       : implement a search that filter the List of Persons    
+    Regular parameters  : display a list of persons in a table in a childComponents
+    Route   parameters  : display a person passing the Id as a route parameters
+    EventCallback       : implement a search that filter the List of Persons
 *@
 
-@*regular parameters*@
-
+@*Regular Parameters*@
+<h4>Regular Parameter</h4>
 <RegularParameter Persons="persons" />
+<br />
+<hr />
 
 @*route parameters*@
 <hr />
 <h3>Route Parameter</h3>
 <br />
 <div>
-    @foreach(var person in persons)
+    @foreach (var person in persons)
     {
         <a href="@($"/routeparameters/{person.Id}")">@(person.FirstName + " " + person.LastName) </a>
         <br />
@@ -32,10 +33,10 @@ EventCallback       : implement a search that filter the List of Persons
 
 <br />
 
-@if(personFiltered !=null && personFiltered.Count() > 0)
+@if (personFiltered != null && personFiltered.Count() > 0)
 {
     <div>
-        @foreach(var person in personFiltered)
+        @foreach (var person in personFiltered)
         {
             <ul>
                 <li>@(person.FirstName + ' ' + person.LastName)</li>
@@ -56,11 +57,11 @@ EventCallback       : implement a search that filter the List of Persons
     {
         persons = new()
         {
-            new Person() { Id = 1, FirstName = "Vieriu", LastName = "Alexandru", Age = 32},
-            new Person() { Id = 2, FirstName = "Dumitrascu", LastName = "Alexandru", Age = 33 },
-            new Person() { Id = 3, FirstName = "Cercel", LastName = "Cristian", Age = 42 },
-            new Person() { Id = 4, FirstName = "Popescu", LastName = "Cosmin", Age = 45 },
-        };
+                new Person() { Id = 1, FirstName = "Vieriu", LastName = "Alexandru", Age = 32 },
+                new Person() { Id = 2, FirstName = "Dumitrascu", LastName = "Alexandru", Age = 33 },
+                new Person() { Id = 3, FirstName = "Cercel", LastName = "Cristian", Age = 42 },
+                new Person() { Id = 4, FirstName = "Popescu", LastName = "Cosmin", Age = 45 },
+            };
     }
 
     public void FilterName(string filter)

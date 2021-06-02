@@ -74,9 +74,4 @@ namespace _37_Dependency_Injection
     {
         public void Persist();
     }
-
-
-
-
-
 }

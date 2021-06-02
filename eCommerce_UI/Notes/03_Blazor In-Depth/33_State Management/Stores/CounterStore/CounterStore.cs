@@ -70,6 +70,4 @@ namespace eCommerce_UI.Notes.Stores.CounterStore
             Count = count;
         }
     }
-
-
 }

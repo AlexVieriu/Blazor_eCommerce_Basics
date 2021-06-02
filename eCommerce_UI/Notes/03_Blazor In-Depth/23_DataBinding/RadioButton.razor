@@ -59,9 +59,9 @@ Item selected : customer2.Name
 @*Display Name*@
 
 <div>
-    <EditForm Model="newCustomerObj">
-        <p>Item selected: @newCustomerObj.Name</p>
-        <InputRadioGroup @bind-Value="newCustomerObj.Name">
+    <EditForm Model="customer">
+        <p>Item selected: @customer.Name</p>
+        <InputRadioGroup @bind-Value="customer.Name">
             @foreach (var item in customers)
             {
                 <InputRadio Value="item.Name" />
@@ -104,5 +104,5 @@ Item selected : customer2.Name
             new Customer() { Name = "Cristi" }
         };
 
-    private Customer newCustomerObj = new();
+    private Customer customer = new();
 }

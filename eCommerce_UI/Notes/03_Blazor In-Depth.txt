@@ -1,4 +1,4 @@
-﻿23. Data Binding Part 1
+﻿24. Data Binding Part 1
 
 -> create a <label> and <textbox> to demonstait one-way and two-way databiding 
 -> create a checkbox
@@ -69,7 +69,7 @@ Method 3:
 </EditForm>
 
 
-25. Overview of Communication between Components
+26. Overview of Communication between Components
 
 -> page components
 -> non-page components(reusable components)
@@ -82,10 +82,11 @@ d. EventCallback
 e. Reference Parameters
 
 
-26. Review Parameters, Route Parameters and EventCallback
+27. Review Parameters, Route Parameters and EventCallback
 
 I. Regular Parameters
--> ex: in a foreach function we pass the parameter from the base component to the child component
+-> ex: pass parameter from the base component to the child component
+
 <RegularParameter Persons="persons" />
 "persons" can be: class, List<class>, Enum, .....
 
@@ -96,13 +97,17 @@ ex: @page "/product/{id:int}"
 
 III. EventCallback
 
--> we use this method when we want to transfer data(filter, List<Customer>, ...) from Child to Base component
+-> use EventCallback when we want to transfer data(filter, List<Customer>, ...) from 
+Child to Base component
 
--> fist we need a list of Customers(all of the list)
--> filter the list using the child componet, and use EventCallBack to bring the filter to the base component
+-- Base Component --
+@Code:
+-> declare List<Customer>
+-> get the List<Customer> : OnInizialized()
+-> FilterPersons(string filter)
 
 
--> create a child component:
+-- Child component --
 UI:
 label, input(text, @bind-value), button(@onclick)
 
@@ -113,9 +118,9 @@ label, input(text, @bind-value), button(@onclick)
 }
 
 
-27. Cascading Parameters
+28. Cascading Parameters
 
--> we only can cascade values from the top to the bottom, from base component to the child component
+-> we only can cascade values from the top to the bottom, from base to child component
 
 -> create a Base Component, with a button that pass the parameter to all his childs
 -> create Component1.razor, Component2.razor
@@ -127,9 +132,9 @@ ChildComponent:
 [CascadingParameter(Name = "TestCounter")]
 
 
-28. Referencing Child Components
+29. Referencing Child Components
 
--> we use this when we want to call Child methods, properties from the Base component
+-> we use this when we want to call Child methods/properties  from the Base component
 
 UI:
 -> create a button that access the visibilityComponent method
@@ -139,17 +144,11 @@ UI:
 -> write the @onclick event that access the method from the child component
 
 
-29. RenderFragment
+30. RenderFragment
 
-Why we use RenderFragment???
+-> used when we want to customize the Child Component from Base Component
 
-
--> if we want to style the ChildComponent at a Specific BaseComponent
--> ex: we have a Child Component that is the same all over our App, but we want to Customize that 
-Child component in a specific Page, we can do that with RenderFragment, by modifying the the 
-Child component in the Base Component
-
--- RenderFrag --
+-- RenderFragmentComp --
 
 UI: 
 <TemplatedComponent Items="products" TItems="Product">
@@ -183,23 +182,33 @@ List<TItems> Items
 RenderFragment<TItems> RepeaterItem 
 
 
-30. When does a component render
+31. When does a component render
 
--- Web Assembly project -- 
+-- WASM project -- 
+
 Debugging:
-I. In Visual Studio code:
--- launchSettings.json --
-"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+I. In Visual Studio:
+-> Start Without Debugging (Ctrl+F5) isn't supported.
 
 II. In Browser:
 -> shift + alt + d
 -> copy link in Win + R
 -> shift + alt + d in the new Debugging Windows app
 (don't forget to delete the link from the previos point in: launchSettings.json)
+//"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 
-Link: https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-5.0&tabs=visual-studio
+Link: https://docs.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-6.0&tabs=visual-studio
 
-Component LifeCycle: https://blazor-university.com/components/component-lifecycles/
+
+Component LifeCycle: 
+https://blazor-university.com/components/component-lifecycles/
+https://docs.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-6.0
+
+a. When components are created
+b. When components events are triggered
+c. When components parameter values are changed 
+d. When developers manually trigger the rendering
+
 
 a. When components are created
 	-> when you just come to the page
@@ -211,14 +220,13 @@ b. When components events are triggered
 	-> even if we comment : currentCount++ , the component is still triggered
 	-> as long as an event is triggered, the component will rerender
 	-> component rerender only for UI events: click button, changing a dropdownlist, ...
-	-> if we create an event or a delegate in c# and we want to trigger that event/delegate manually, 
-	it will not work, the component will not render
 	-> the component will be rerendered only if the Event is inside the component, will not work for 
 	the events outside the component
 
 ex1: if we have a button in the parent component, the child component will not be rendered(and vis versa)
 
-Solution/Exception: use RenderFragment to pass the event from the child to the parent, so the component rerender
+Solution/Exception: use RenderFragment to pass the event from the child to the parent, 
+so the component rerender
 					
 c. When components parameter values are changed 
 use [Parameter] to pass the event to the child, so the component rerender
@@ -240,7 +248,7 @@ public void Refresh()
 }
 
 
-31. Component Lifecycle Events
+32. Component Lifecycle Events
 
 Component LifeCycle: https://blazor-university.com/components/component-lifecycles/
 
@@ -250,50 +258,52 @@ I. First time Rendering
 -> when you navigate to the component
 
 Methods: 
--> SetParameterAsync()					: This method is executed whenever the parent renders.
-										  The base.SetParametersAsync method must be executed before any await instructions 
-										  in the method, otherwise an InvalidOperationException will be thrown.
+-> SetParameterAsync()	: This method is executed whenever the parent renders.
+						  The base.SetParametersAsync method must be executed before any await instructions 
+						  in the method, otherwise an InvalidOperationException will be thrown.
 
--> OnInitialized / OnInitializedAsync	: Once the state from the ParameterCollection has been assigned to the 
-											component’s [Parameter] properties, these methods are executed
-										  This method is only executed once when the component is first created. If the parent 
-										  changes the component’s parameters at a later time, this method is skipped.
+-> OnInitialized / 
+   OnInitializedAsync	: Once the state from the ParameterCollection has been assigned to the 
+						  component’s [Parameter] properties, these methods are executed
+						  This method is only executed once when the component is first created. 
+						  If the parent changes the component’s parameters at a later time, 
+						  this method is skipped.
 
--> OnParametersSet/OnParametersSetAsync	: This method will be executed immediately after OnInitializedAsync 
-											if this is a new instance of a component
-										  If it is an existing component that is being re-rendered because its parent is 
-										  re-rendering then the OnInitialized* methods will not be executed, and this method 
-										  will be executed immediately after SetParametersAsync instead.
+-> OnParametersSet/
+   OnParametersSetAsync	: This method will be executed immediately after OnInitializedAsync 
+						  if this is a new instance of a component
+						  If it is an existing component that is being re-rendered because its parent is 
+						  re-rendering then the OnInitialized* methods will not be executed, and this method 
+						  will be executed immediately after SetParametersAsync instead.
 
--> StateHasChanged						: This method flags the component to be rendered.
-										  A component will call this method whenever it wants to inform Blazor that changes 
-										  have occurred that would result in the rendered output being different.
+-> StateHasChanged		: This method flags the component to be rendered.
+						  A component will call this method whenever it wants to inform Blazor that changes 
+						  have occurred that would result in the rendered output being different.
 
--> ShouldRender							: This method can be used to prevent the component’s RenderTree from being 
-										  recalculated by returning false
-										  * This method is not executed the first time the component is rendered
+-> ShouldRender			: This method can be used to prevent the component’s RenderTree from being 
+						  recalculated by returning false
+						  * This method is not executed the first time the component is rendered
 
--> BuildRenderTree						: This method renders the component’s content to an in-memory representation 
-										  of what should be rendered to the user.
+-> BuildRenderTree		: This method renders the component’s content to an in-memory representation 
+						  of what should be rendered to the user.
 
-OnAfterRender / OnAfterRenderAsync		: These last two methods are executed every time Blazor has re-generated the 
-											component’s RenderTree.
-										  It is not until after the OnAfterRender methods have executed that it is safe to 
-										  use any references to components set via the @ref directive.
+OnAfterRender / 
+OnAfterRenderAsync		: These last two methods are executed every time Blazor has re-generated the 
+						  component’s RenderTree.
+						  It is not until after the OnAfterRender methods have executed that it is safe to 
+						  use any references to components set via the @ref directive.
 
-Dispose									: Although this isn’t strictly one of the ComponentBase’s lifecycle methods, 
-										  if a component implements IDisposable then Blazor will execute Dispose once 
-										  the component is removed from its parent’s render tree. To implement IDisposable 
-										  we need to add @implements IDisposable to our razor file.
+Dispose					: Although this isn’t strictly one of the ComponentBase’s lifecycle methods, 
+						  if a component implements IDisposable then Blazor will execute Dispose once 
+						  the component is removed from its parent’s render tree. To implement IDisposable 
+						  we need to add @implements IDisposable to our razor file.
 
 
 Methods:  OnAfterRender()
 
--> after all of this the page is LOADED
 -> the double loading happens when the app is loaded for the very first time !!
-
-The code Blazor executes on await inside an async method will only be executed on the first await. 
-Subsequent awaits will not cause multiple renders. For example: 
+-> the Blazor code executes on await only the first time
+-> subsequent awaits will not cause multiple renders. For example: 
 
 protected override async Task OnParametersSetAsync()
 {
@@ -324,9 +334,19 @@ II. Rerendering
 
 a. adding a parameter for the child component
 
-How the methods are called: 
-Parent - ShouldRender
-	Child - SetParameters
+-> how the methods are called when we go on the Base Page: 
+Parent - SetParametersAsync
+	   - OnInitialized
+	   - OnParametersSet
+	Child - SetParametersAsync
+	Child - OnInitialized
+	Child - OnParametersSet
+
+
+-> how the methods are called when we press the Button: 
+Parent  - OnClick()
+		- ShouldRender
+	Child - SetParametersAsync
 	Child - OnPArametersSet
 	Child - ShouldRender
 Parent - OnAfterRender
@@ -336,13 +356,14 @@ Parent - OnAfterRender
 b. without adding paramenter for the child component
 
 How the methods are called: 
-Parent - ShouldRender
-Parent - OnAfterRender
+Parent	- OnClick()
+		- ShouldRender
+		- OnAfterRender
 
 -> the child component is not rendered ! 
 
 
-32. Forms and Validations
+33. Forms and Validations
 
 -> blazor is a single pg app: only the first pageload goes to the HttpRequest and response pipeline
 -> the subsequent actions will not be postback to the backend in order to perform submissions
@@ -357,6 +378,7 @@ Resolution:
 
 UI:
 -> create a EditForm with fields from class Person
+-> display the Person fields
 
 @code:
 -> Create class Person and put validations
@@ -364,7 +386,7 @@ UI:
 -> create a submit method for the OnValidSubmit: ValidFormSubmitted()
 
 
-33. State Management with Observer Pattern
+34. State Management with Observer Pattern
 
 Recap:
 -> Encapsulation: {get; set;}
