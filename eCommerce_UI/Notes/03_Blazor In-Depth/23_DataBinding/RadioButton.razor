@@ -23,22 +23,8 @@
             @foreach (var item in (EnumNames[])Enum.GetValues(typeof(EnumNames)))
             {
                 <InputRadio Value="item" />
-                <span>@item</span><br />
-            }
-        </InputRadioGroup>
-    </EditForm>
-
-    <br />
-
-    <strong>Enum Method with values </strong>
-
-    <EditForm Model="enumNumbers">
-        <p>Item selected: @(enumNumbers)</p>
-        <InputRadioGroup @bind-Value="(enumNumbers)">
-            @foreach (var item in (EnumNames[])Enum.GetValues(typeof(EnumNames)))
-            {
-                <InputRadio Value="(Convert.ToInt32(item))" />
-                <span>@item</span><br />
+                @(" " + item)
+                <br />
             }
         </InputRadioGroup>
     </EditForm>
@@ -48,21 +34,46 @@
 
 @*Method 3*@
 @*Cand vrem sa facem un Radio Button cu o List<Customer> din baza de date*@
+@*
+toate valorile din <InputRadio  Value="item.Name"/>  se stocheaza in
+<InputRadioGroup @bind-Value="customer2.Name">
+Item selected : customer2.Name
+*@
+
+
+@*Display Id*@
 
 <div>
-    <strong>Class method</strong>
     <EditForm Model="customer">
-        <p>Item Selected: @customer.Name</p>
-        <InputRadioGroup @bind-Value="customer.Name">
-            @foreach (var customer in customers)
+        <p>Item selected: @customer.Id</p>
+        <InputRadioGroup @bind-Value="customer.Id">
+            @foreach (var item in customers)
             {
-                <InputRadio Value="customer.Name" />
-                <span>@customer.Name</span><br />
+                <InputRadio Value="item.Id" />
+                <span>@item.Name</span><br />
             }
         </InputRadioGroup>
     </EditForm>
 </div>
 
+@*Display Name*@
+
+<div>
+    <EditForm Model="newCustomerObj">
+        <p>Item selected: @newCustomerObj.Name</p>
+        <InputRadioGroup @bind-Value="newCustomerObj.Name">
+            @foreach (var item in customers)
+            {
+                <InputRadio Value="item.Name" />
+                @(" " + item.Name)
+                <br />
+            }
+        </InputRadioGroup>
+    </EditForm>
+</div>
+
+<br />
+<hr />
 
 
 @code{
@@ -81,17 +92,17 @@
 
     public class Customer
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
     }
 
     private List<Customer> customers = new()
     {
-        new Customer() { Name = "Alex" },
-        new Customer() { Name = "Alina" },
-        new Customer() { Name = "Dumi" },
-        new Customer() { Name = "Cristi" }
-    };
+            new Customer() { Name = "Alex" },
+            new Customer() { Name = "Alina" },
+            new Customer() { Name = "Dumi" },
+            new Customer() { Name = "Cristi" }
+        };
 
-    private Customer customer = new();
+    private Customer newCustomerObj = new();
 }
