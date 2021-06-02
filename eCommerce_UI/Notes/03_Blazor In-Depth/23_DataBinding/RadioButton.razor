@@ -22,8 +22,7 @@
             @foreach (var item in (EnumNames[])Enum.GetValues(typeof(EnumNames)))
             {
                 <InputRadio Value="item" />
-                @(" " + item)
-                <br />
+                <span>@item</span><br />
             }
         </InputRadioGroup>
     </EditForm>
@@ -33,21 +32,45 @@
 
 @*Method 3*@
 @*Cand vrem sa facem un Radio Button cu o List<Customer> din baza de date*@
+@*
+toate valorile din <InputRadio  Value="item.Name"/>  se stocheaza in
+<InputRadioGroup @bind-Value="customer2.Name">
+Item selected : customer2.Name
+*@
+
+
+@*Display Id*@
 
 <div>
-    <EditForm Model="newCustomerObj">
-        <p>Item selected: @newCustomerObj.Name</p>
-        <InputRadioGroup @bind-Value="newCustomerObj.Name">
+    <EditForm Model="customer">
+        <p>Item selected: @customer.Id</p>
+        <InputRadioGroup @bind-Value="customer.Id">
             @foreach (var item in customers)
             {
-                <InputRadio Value="item.Name" />
-                @(" " + item.Name)
-                <br />
+                <InputRadio Value="item.Id" />
+                <span>@item.Name</span><br />
             }
         </InputRadioGroup>
     </EditForm>
 </div>
 
+@*Display Name*@
+
+<div>
+    <EditForm Model="customer2">
+        <p>Item selected: @customer2.Name</p>
+        <InputRadioGroup @bind-Value="customer2.Name">
+            @foreach (var item in customers)
+            {
+                <InputRadio Value="item.Name" />
+                <span>@item.Id</span><br />
+            }
+        </InputRadioGroup>
+    </EditForm>
+</div>
+
+<br />
+<hr />
 
 
 @code{
@@ -65,17 +88,19 @@
 
     public class Customer
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
     }
 
     private List<Customer> customers = new()
     {
-            new Customer() { Name = "Alex" },
-            new Customer() { Name = "Alina" },
-            new Customer() { Name = "Dumi" },
-            new Customer() { Name = "Cristi" }
-        };
+        new Customer() { Id = 1, Name = "Alex" },
+        new Customer() { Id = 2, Name = "Alina" },
+        new Customer() { Id = 3, Name = "Dumi" },
+        new Customer() { Id = 4, Name = "Cristi" }
+    };
 
-    private Customer newCustomerObj = new();
+    private Customer customer = new();
+    private Customer customer2 = new();
+
 }

@@ -14,7 +14,7 @@ namespace eShop.UseCases.SearchProductScreen
 
         public Product Execute(int id)
         {
-            return _productRepository.GetProduct(id);
+            return _productRepository.GetProductById(id);
         }
     }
 }

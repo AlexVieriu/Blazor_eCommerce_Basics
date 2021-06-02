@@ -7,6 +7,6 @@ namespace eShop.UseCases.PluginInterfaces
     {
         IEnumerable<Product> GetProducts(string filter = null);
 
-        Product GetProduct(int id);
+        Product GetProductById(int id);
     }
 }

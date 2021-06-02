@@ -1,8 +1,12 @@
 ﻿<div>
-    <label>First Name: &nbsp;</label>
-    <input type="text" @bind-value="filter" /> &nbsp;
+    <input type="text" @bind-value="filter" />
     <button class="btn btn-primary" @onclick="HandleSearch">Search</button>
 </div>
+<br />
+<div>
+    <input type="text" @bind-value="filter" @oninput="HandleSearchOnChange" />
+</div>
+<br />
 
 
 @code{
@@ -13,6 +17,13 @@
 
     public void HandleSearch()
     {
+        OnSearch.InvokeAsync(filter);
+    }
+
+    public void HandleSearchOnChange(ChangeEventArgs e)
+    {
+        filter = e.Value.ToString();
+
         OnSearch.InvokeAsync(filter);
     }
 }

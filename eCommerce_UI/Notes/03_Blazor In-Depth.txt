@@ -141,7 +141,13 @@ UI:
 
 29. RenderFragment
 
--> if we want to 
+Why we use RenderFragment???
+
+
+-> if we want to style the ChildComponent at a Specific BaseComponent
+-> ex: we have a Child Component that is the same all over our App, but we want to Customize that 
+Child component in a specific Page, we can do that with RenderFragment, by modifying the the 
+Child component in the Base Component
 
 -- RenderFrag --
 

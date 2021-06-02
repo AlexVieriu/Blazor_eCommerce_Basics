@@ -1,0 +1,34 @@
+﻿@page "/dynamiccomponent"
+
+<h3>Dynamic Component</h3>
+
+<br />
+<br />
+<button class="btn btn-primary" @onclick="HandleBlazorServerClick">Blazor Server</button>
+<button class="btn btn-primary" @onclick="HandleBlazorWASMClick">Blazor WASM</button>
+<br />
+<br />
+<h3>@title</h3>
+<br />
+<div>
+    @content
+</div>
+
+
+@code{
+    string title;
+    string content;
+
+
+    private void HandleBlazorServerClick()
+    {
+        title = "Blazor Server";
+        content = "This is a Blazor Server content";
+    }
+
+    private void HandleBlazorWASMClick()
+    {
+        title = "Blazor WASM";
+        content = "This is a Blazor WASM content";
+    }
+}

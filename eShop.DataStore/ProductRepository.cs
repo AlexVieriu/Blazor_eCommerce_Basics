@@ -38,7 +38,7 @@ namespace eShop.DataStore
             };
         }
 
-        public Product GetProduct(int id)
+        public Product GetProductById(int id)
         {
             return Products.FirstOrDefault(q => q.Id == id);
         }

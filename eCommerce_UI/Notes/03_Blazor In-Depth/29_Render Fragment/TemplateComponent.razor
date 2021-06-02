@@ -1,12 +1,13 @@
 ﻿@typeparam TList
 
+@Header
 <div>
     @foreach (var item in Items)
     {
         @RepeatFrag(item)
     }
 </div>
-
+@Footer
 
 @code{
     [Parameter]
@@ -17,6 +18,7 @@
 
     [Parameter]
     public List<TList> Items { get; set; }
+
     [Parameter]
     public RenderFragment<TList> RepeatFrag { get; set; }
 }

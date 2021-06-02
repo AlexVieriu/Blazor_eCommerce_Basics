@@ -1,4 +1,4 @@
-﻿9. Screen Mockup and Components Breakdown
+﻿10. Screen Mockup and Components Breakdown
 
 -> create a mockup for the site
 
@@ -43,7 +43,7 @@ Project Structure:
 -> eShop.Web			
 
 
-10. Analysis and Design
+11. Analysis and Design
 
 Clean arhitecture:
 
@@ -68,7 +68,7 @@ DataRepository:	-> a repository class is where we encapsulate all of the data ac
 -> in a clean arhitecture, Blazor belong to the UI interface
 
 
-11. Implementing Core Business Layer
+12. Implementing Core Business Layer
 
 -> create a business library project : eShop.CoreBusiness
 
@@ -78,18 +78,20 @@ Core business logic:
 -> core business logic exists with/without the existence of the application ???
 
 
-12. Implementing Use Cases Layer
+13. Implementing Use Cases Layer
 
--> create a business library project : eShop.UseCases
+-- eShop.UseCases --
+
 -> add eShop.CoreBusiness reference to the Dependencies
-
 
 SearchProductScreen :	-> SearchProduct.cs : IEnumerable<Product> Excecute(string filter) { ... }
 						-> ViewProduct.cs	: Product Execute(string filter)
 ViewProductScreen	:
 
+-> usecases can be used by any type of project
 
-13. Data Store Plugin Interface
+
+14. Data Store Plugin Interface
 
 -- eShop.UseCases -- 
 
@@ -114,11 +116,11 @@ PluginInterfaces -> DataStore -> IProductRepository.cs : IEnumerable<Product> Pr
 -> create method that returns a Product
 	public Product Execute(int id)
 	{
-		return _ProductRepository.GetProduct(filter);
+		return _ProductRepository.GetProduct(id);
 	}
 
 
-14. Implementing In-Memory Data Store Plugin
+15. Implementing In-Memory Data Store Plugin
 
 -> database or datastore are IO devices
 -> any IO devices should be implemented as plug-ins
@@ -149,7 +151,7 @@ PluginInterfaces -> DataStore -> IProductRepository.cs : IEnumerable<Product> Pr
 	}
 
 
-15. Create Search Products Component
+16. Create Search Products Component
 
 -- eShop.UseCases --
 
@@ -160,7 +162,7 @@ PluginInterfaces -> DataStore -> IProductRepository.cs : IEnumerable<Product> Pr
 
 -> add dependency injection : 
 	services.AddTranzient<IProductRepository,ProductRepository>();
-	servicies.AddTranzient<ISearchProduct, SearchProduct>();
+	services.AddTranzient<ISearchProduct, SearchProduct>();
 	services.AddTranzient<IViewProduct, ViewProduct>();
 
 <IProductRepository,ProductRepository>() : 
@@ -186,7 +188,7 @@ Pages-> Components -> SearchProduct.razor
 -> check to see if return all 20 Products
 
 
-16. Implementing Search Products Screen
+17. Implementing Search Products Screen
 
 -- SearchProduct.razor --
 
@@ -202,7 +204,7 @@ UI:
 <ul/>
 
 
-17. Implementing Search Bar Component
+18. Implementing Search Bar Component
 
 -> put the Search Bar into a seperate component
 
@@ -230,7 +232,7 @@ InvokeAsync: invokes the delegate associated with this binding and dispatches an
 by using an EventCallback : OnSearch
 
 
-18. Implementing Product Item Component
+19. Implementing Product Item Component
 
 -- SearchProduct.cs --
 
@@ -243,7 +245,7 @@ UI:
 so they will be initialized in the child component
 
 
-19. Implementing Filtering
+20. Implementing Filtering
 
 -- SearchProduct.razor --
 
@@ -258,7 +260,7 @@ so they will be initialized in the child component
 -> Execute() is in:  eShop.UseCases-> SearchPruductScreen -> SearchProduct.cs
 
 
-20. Styling with Bootstrap
+21. Styling with Bootstrap
 
 Boostrap site: https://getbootstrap.com/docs/4.0/components/forms/
 	-> Readonly plain text
@@ -272,7 +274,7 @@ class="form-group mx-sm-3 mb-2"
 mx-sm-3 : https://getbootstrap.com/docs/4.0/utilities/spacing/
 
 
-21. View Product Details Component
+22. View Product Details Component
 
 Pages-> Components -> ViewProduct.razor
 
@@ -318,7 +320,6 @@ Controls-> ProductIntem.razor
 -> add Bootstrap Card to the ViewProduct.razor: https://getbootstrap.com/docs/4.0/components/card/
 
 -> add a button to go back to the list of Products : 
-
 
 
 
